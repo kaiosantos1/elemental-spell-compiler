@@ -1,0 +1,231 @@
+
+Exemplo 1 — Programa completo válido
+(Demonstra entidades, técnicas, recursão, técnicas inline e usar)
+
+entidade FrostMage {
+    energia 500
+    elemento agua
+    elemento fogo
+    elemento vento
+}
+
+entidade StormKnight {
+    energia 250
+    elemento raio
+    elemento vento
+}
+
+tecnica fogo_base {
+    elementos fogo
+    custo 20
+    dano 50
+}
+
+tecnica agua_base {
+    elementos agua
+    custo 15
+    dano 40
+}
+
+tecnica explosao_termica {
+    combinar fogo_base +
+        tecnica chama_sagrada {
+            elementos fogo
+            custo 30
+            dano 80
+        }
+}
+
+tecnica tempestade_arcana {
+    combinar explosao_termica +
+        tecnica gelo_mistico {
+            elementos agua
+            custo 25
+            dano 70
+        }
+}
+
+tecnica ritual_supremo {
+    combinar tempestade_arcana +
+        tecnica vento_divino {
+            elementos vento
+            custo 10
+            dano 20
+        }
+}
+
+usar FrostMage fogo_base
+usar FrostMage explosao_termica
+usar FrostMage tempestade_arcana
+usar FrostMage ritual_supremo
+
+
+
+Exemplo 2 — Recursividade profunda
+(Combinação de combinação de combinação)
+
+tecnica base_fogo {
+    elementos fogo
+    custo 10
+    dano 20
+}
+
+tecnica base_agua {
+    elementos agua
+    custo 15
+    dano 25
+}
+
+tecnica nivel_1 {
+    combinar base_fogo + base_agua
+}
+
+tecnica nivel_2 {
+    combinar nivel_1 +
+        tecnica vento_extra {
+            elementos vento
+            custo 5
+            dano 10
+        }
+}
+
+tecnica nivel_3 {
+    combinar nivel_2 +
+        tecnica raio_extra {
+            elementos raio
+            custo 20
+            dano 50
+        }
+}
+
+
+
+Exemplo 3 — Erro Semântico:
+
+Entidade inexistente
+
+usar Naruto fogo_base
+
+
+
+Exemplo 4 — Erro Semântico:
+
+Técnica inexistente
+
+entidade Mage {
+    energia 300
+    elemento fogo
+}
+
+usar Mage mega_ultimate_attack
+
+
+
+Exemplo 5 — Erro Semântico:
+
+Energia insuficiente
+
+entidade Apprentice {
+    energia 10
+    elemento fogo
+}
+
+tecnica big_spell {
+    elementos fogo
+    custo 100
+    dano 300
+}
+
+usar Apprentice big_spell
+
+
+
+Exemplo 6 — Erro Semântico:
+
+Elemento incompatível
+
+entidade StormKnight {
+    energia 500
+    elemento raio
+    elemento vento
+}
+
+tecnica prisao_de_gelo {
+    elementos agua
+    custo 40
+    dano 90
+}
+
+usar StormKnight prisao_de_gelo
+
+
+
+Exemplo 7 — Erro Sintático
+
+(Falta "{")
+
+entidade Sakura
+    energia 300
+}
+
+
+
+Exemplo 8 — Erro Léxico
+
+(Caractere ilegal)
+
+entidade Sasuke {
+    energia @@@
+}
+
+
+Exemplo 9 — Técnica inline isolada
+
+tecnica ultimate_spell {
+
+    combinar
+
+        tecnica mini_fogo {
+            elementos fogo
+            custo 10
+            dano 20
+        }
+
+        +
+
+        tecnica mini_agua {
+            elementos agua
+            custo 15
+            dano 30
+        }
+}
+
+
+
+
+Exemplo 10 — Uso completo com falha final
+
+entidade FrostMage {
+    energia 120
+    elemento agua
+    elemento fogo
+}
+
+tecnica fogo_base {
+    elementos fogo
+    custo 20
+    dano 50
+}
+
+tecnica mega_spell {
+    combinar fogo_base +
+        tecnica agua_extra {
+            elementos agua
+            custo 40
+            dano 100
+        }
+}
+
+usar FrostMage mega_spell
+usar FrostMage mega_spell
+usar FrostMage mega_spell

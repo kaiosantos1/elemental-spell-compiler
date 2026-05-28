@@ -1,0 +1,10 @@
+# Cache Python
+__pycache__/
+*.pyc
+
+# Arquivos gerados pelo PLY
+parsetab.py
+parser.out
+
+# VSCode (opcional)
+.vscode/

@@ -14,6 +14,256 @@ start = 'programa'
 tabela_entidades = {}
 tabela_tecnicas = {}
 
+tabela_fusoes = {
+
+    # 1. Combinações Base + Base (2 Elementos)
+    frozenset(['fogo', 'vento']): 'explosao',
+    frozenset(['fogo', 'agua']): 'vapor',
+    frozenset(['fogo', 'terra']): 'lava',
+    frozenset(['fogo', 'raio']): 'plasma',
+
+    frozenset(['agua', 'vento']): 'gelo',
+    frozenset(['agua', 'terra']): 'lama',
+    frozenset(['agua', 'raio']): 'tormenta',
+
+    frozenset(['vento', 'terra']): 'areia',
+    frozenset(['vento', 'raio']): 'tempestade',
+    
+    frozenset(['raio', 'terra']): 'cristal',
+
+
+    # 2. Combinações derivadas + Base
+
+    # Explosão (Fogo + Vento)
+    frozenset(['explosao', 'fogo']): 'explosao',       
+    frozenset(['explosao', 'vento']): 'explosao', 
+    frozenset(['explosao', 'explosao']): 'explosao',
+    frozenset(['explosao', 'agua']): 'magma',     
+    frozenset(['explosao', 'terra']): 'terremoto',     
+    frozenset(['explosao', 'raio']): 'supernova',      
+
+    # Vapor (Fogo + Agua)
+    frozenset(['vapor', 'fogo']): 'vapor',
+    frozenset(['vapor', 'agua']): 'vapor',
+    frozenset(['vapor', 'vapor']): 'vapor',
+    frozenset(['vapor', 'vento']): 'nevoa',           
+    frozenset(['vapor', 'terra']): 'geiser', 
+    frozenset(['vapor', 'raio']): 'nevoa_acida',
+
+    # Lava (Fogo + Terra)
+    frozenset(['lava', 'fogo']): 'lava',
+    frozenset(['lava', 'terra']): 'lava',
+    frozenset(['lava', 'lava']): 'lava',
+    frozenset(['lava', 'agua']): 'obsidiana', 
+    frozenset(['lava', 'vento']): 'cinzas', 
+    frozenset(['lava', 'raio']): 'meteorito',  
+
+    # Plasma (Fogo + Raio)
+    frozenset(['plasma', 'fogo']): 'plasma',
+    frozenset(['plasma', 'raio']): 'plasma',
+    frozenset(['plasma', 'plasma']): 'plasma',
+    frozenset(['plasma', 'agua']): 'radiacao',      
+    frozenset(['plasma', 'vento']): 'laser',    
+    frozenset(['plasma', 'terra']): 'metal_liquido', 
+
+    # Gelo (Agua + Vento)
+    frozenset(['gelo', 'agua']): 'gelo',
+    frozenset(['gelo', 'vento']): 'gelo',
+    frozenset(['gelo', 'gelo']): 'gelo',
+    frozenset(['gelo', 'fogo']): 'gelo_seco',         
+    frozenset(['gelo', 'terra']): 'permafrost',    
+    frozenset(['gelo', 'raio']): 'ventania_polar',  
+
+    # Lama (Agua + Terra)
+    frozenset(['lama', 'agua']): 'lama',
+    frozenset(['lama', 'terra']): 'lama',
+    frozenset(['lama', 'lama']): 'lama',
+    frozenset(['lama', 'fogo']): 'argila',             
+    frozenset(['lama', 'vento']): 'poeira',           
+    frozenset(['lama', 'raio']): 'areia_movedica',    
+
+    # Tormenta (Agua + Raio)
+    frozenset(['tormenta', 'agua']): 'tormenta',
+    frozenset(['tormenta', 'raio']): 'tormenta',
+    frozenset(['tormenta', 'tormenta']): 'tormenta',
+    frozenset(['tormenta', 'fogo']): 'chuva_acida',   
+    frozenset(['tormenta', 'vento']): 'furaçao',  
+    frozenset(['tormenta', 'terra']): 'pântano',    
+
+    # Areia (Vento + Terra)
+    frozenset(['areia', 'vento']): 'areia',
+    frozenset(['areia', 'terra']): 'areia',
+    frozenset(['areia', 'areia']): 'areia',
+    frozenset(['areia', 'fogo']): 'vidro',     
+    frozenset(['areia', 'agua']): 'lodo',     
+    frozenset(['areia', 'raio']): 'fulgurito',     
+
+    # Tempestade (Vento + Raio)
+    frozenset(['tempestade', 'vento']): 'tempestade',
+    frozenset(['tempestade', 'raio']): 'tempestade',
+    frozenset(['tempestade', 'tempestade']): 'tempestade',
+    frozenset(['tempestade', 'fogo']): 'incendio',    
+    frozenset(['tempestade', 'agua']): 'diluvio',
+    frozenset(['tempestade', 'terra']): 'desabamento',  
+
+    # Cristal (Raio + Terra)
+    frozenset(['cristal', 'raio']): 'cristal',
+    frozenset(['cristal', 'terra']): 'cristal',
+    frozenset(['cristal', 'cristal']): 'cristal',
+    frozenset(['cristal', 'fogo']): 'rubi',          
+    frozenset(['cristal', 'agua']): 'prisma',      
+    frozenset(['cristal', 'vento']): 'som_sonico' 
+
+
+    
+}
+
+cores_elementos = {
+
+    # 1. Elementos Base
+
+    'fogo': (255, 69, 0),          # Vermelho Alaranjado
+    'agua': (30, 144, 255),        # Azul Esquilo
+    'vento': (240, 230, 140),      # Amarelo Cáqui Claro
+    'raio': (138, 43, 226),        # Roxo Violeta
+    'terra': (139, 69, 19),        # Marrom Sela
+
+    # 2. Elementos derivados de 2 vias (Base + Base)
+
+    'explosao': (255, 140, 0),     # Laranja Escuro (Fogo + Vento)
+    'vapor': (220, 220, 220),      # Branco Cinzento (Fogo + Água)
+    'lava': (226, 88, 34),         # Laranja Vulcânico (Fogo + Terra)
+    'plasma': (255, 0, 128),       # Rosa Choque (Fogo + Raio)
+    'gelo': (0, 255, 255),         # Ciano (Água + Vento)
+    'lama': (101, 67, 33),         # Marrom Escuro (Água + Terra)
+    'tormenta': (72, 61, 139),     # Azul Escuro Purpúreo  (Água + Raio)
+    'areia': (238, 214, 175),      # Bege Areia (Vento + Terra)
+    'tempestade': (112, 128, 144), # Cinza Ardósia (Vento + Raio)
+    'cristal': (186, 85, 211),     # Orquídea Média (Raio + Terra)
+
+    # 3. Elementos derivados de 3 vias (Derivado + Base)
+    
+    # Derivados de Explosão
+    'magma': (178, 34, 34),        # Vermelho Tijolo
+    'terremoto': (74, 53, 41),     # Marrom Profundo
+    'supernova': (255, 255, 204),  # Amarelo Estelar Pálido 
+
+    # Derivados de Vapor
+    'nevoa': (245, 245, 245),      # Branco Fumaça 
+    'geiser': (175, 238, 238),     # Turquesa Pálido
+    'nevoa_acida': (152, 251, 152),# Verde Pálido Elétrico
+
+    # Derivados de Lava
+    'obsidiana': (21, 21, 21),     # Preto Vidro Vulcânico
+    'cinzas': (169, 169, 169),     # Cinza Escuro 
+    'meteorito': (105, 105, 105),  # Cinza Carbono
+
+    # Derivados de Plasma
+    'radiacao': (50, 205, 50),     # Verde Lima Fluorescente
+    'laser': (255, 0, 0),          # Vermelho Puro Concentrado
+    'metal_liquido': (212, 175, 55),# Ouro Metálico 
+
+    # Derivados de Gelo
+    'gelo_seco': (240, 248, 255),  # Branco Gelo 
+    'permafrost': (95, 158, 160),  # Azul Cadete 
+    'ventania_polar': (176, 224, 230),# Azul Pó 
+
+    # Derivados de Lama
+    'argila': (210, 105, 30),      # Chocolate 
+    'poeira': (222, 184, 135),     # Madeiro Claro 
+    'areia_movedica': (188, 143, 143),# Rosado Argiloso 
+
+    # Derivados de Tormenta
+    'chuva_acida': (127, 255, 0),  # Verde Amarelado Ácido 
+    'furaçao': (47, 79, 79),       # Verde Ardósia Escuro
+    'pântano': (46, 139, 87),      # Verde Mar
+
+    # Derivados de Areia
+    'vidro': (143, 188, 143),      # Verde Mar Escuro
+    'lodo': (85, 107, 47),         # Verde Oliva Escuro
+    'fulgurito': (205, 133, 63),   # Bronze Natural
+
+    # Derivados de Tempestade
+    'incendio': (255, 0, 0),       # Vermelho Vivo
+    'diluvio': (0, 0, 128),        # Azul Marinho Profundo 
+    'desabamento': (112, 105, 89), # Cinza Castanho 
+
+    # Derivados de Cristal
+    'rubi': (156, 0, 48),          # Vermelho Rubi Profundo
+    'prisma': (255, 192, 203),     # Rosa Claro Refratado
+    'som_sonico': (230, 230, 250)  # Lavanda Pálido 
+}
+
+elementos_derivados = {
+   
+    # 1. Derivados de 2 vias (Base + Base)
+
+    'explosao': ['fogo', 'vento'],
+    'vapor': ['fogo', 'agua'],
+    'lava': ['fogo', 'terra'],
+    'plasma': ['fogo', 'raio'],
+    
+    'gelo': ['agua', 'vento'],
+    'lama': ['agua', 'terra'],
+    'tormenta': ['agua', 'raio'],
+    
+    'areia': ['vento', 'terra'],
+    'tempestade': ['vento', 'raio'],
+    
+    'cristal': ['raio', 'terra'],
+
+    # 2. Derivados de 3 vias (Derivado + Base)
+    
+    # Derivados de Explosão
+    'magma': ['explosao', 'agua'],
+    'terremoto': ['explosao', 'terra'],
+    'supernova': ['explosao', 'raio'],
+
+    # Derivados de Vapor
+    'nevoa': ['vapor', 'vento'],
+    'geiser': ['vapor', 'terra'],
+    'nevoa_acida': ['vapor', 'raio'],
+
+    # Derivados de Lava
+    'obsidiana': ['lava', 'agua'],
+    'cinzas': ['lava', 'vento'],
+    'meteorito': ['lava', 'raio'],
+
+    # Derivados de Plasma
+    'radiacao': ['plasma', 'agua'],
+    'laser': ['plasma', 'vento'],
+    'metal_liquido': ['plasma', 'terra'],
+
+    # Derivados de Gelo
+    'gelo_seco': ['gelo', 'fogo'],
+    'permafrost': ['gelo', 'terra'],
+    'ventania_polar': ['gelo', 'raio'],
+
+    # Derivados de Lama
+    'argila': ['lama', 'fogo'],
+    'poeira': ['lama', 'vento'],
+    'areia_movedica': ['lama', 'raio'],
+
+    # Derivados de Tormenta
+    'chuva_acida': ['tormenta', 'fogo'],
+    'furaçao': ['tormenta', 'vento'],
+    'pântano': ['tormenta', 'terra'],
+
+    # Derivados de Areia
+    'vidro': ['areia', 'fogo'],
+    'lodo': ['areia', 'agua'],
+    'fulgurito': ['areia', 'raio'],
+
+    # Derivados de Tempestade
+    'incendio': ['tempestade', 'fogo'],
+    'diluvio': ['tempestade', 'agua'],
+    'desabamento': ['tempestade', 'terra'],
+
+    # Derivados de Cristal
+    'rubi': ['cristal', 'fogo'],
+    'prisma': ['cristal', 'agua'],
+    'som_sonico': ['cristal', 'vento']
+}
 
 # Programa -> Para ser possível utilizar mais de uma declaração, como uma declaração de entidade ou uma de técnica
 
@@ -100,7 +350,7 @@ def p_tecnica(p):
         and not isinstance(dados[0], tuple)
     ):
 
-        elementos = []
+        elementos_base = []
         custo = 0
         dano = 0
 
@@ -133,12 +383,59 @@ def p_tecnica(p):
             dano += tecnica_base['dano']
 
             for e in tecnica_base['elementos']:
+                if e not in elementos_base:
+                    elementos_base.append(e)
 
-                if e not in elementos:
-                    elementos.append(e)
+        if len(elementos_base) > 2:
+
+            print(
+                f'Erro semântico: fusões suportam no máximo 2 elementos. '
+                f'Elementos recebidos: {elementos_base}'
+            )
+
+            return
+
+        fusao = tabela_fusoes.get(
+            frozenset(elementos_base)
+        )
+
+        if fusao:
+
+            cor1 = cores_elementos[elementos_base[0]]
+            cor2 = cores_elementos[elementos_base[1]]
+            cor_resultado = cores_elementos[fusao]
+
+            print('\nElementos encontrados:')
+            print(elementos_base)
+
+            print('\nFusão elemental')
+
+            print(
+                f'{elementos_base[0]} + {elementos_base[1]}'
+            )
+
+            print(
+                f'→ {fusao}'
+            )
+
+            print('\nRGB')
+
+            print(
+                f'{cor1} + {cor2}'
+            )
+
+            print(
+                f'→ {cor_resultado}'
+            )
+
+            elementos = [fusao]
+
+        else:
+            elementos = elementos_base
 
         tabela_tecnicas[nome] = {
             'elementos': elementos,
+            'requisitos': elementos_base,
             'custo': custo,
             'dano': dano
         }
@@ -205,12 +502,36 @@ def p_usar(p):
         print(f'Erro semântico: energia insuficiente')
         return
 
-    # Elementos necessários
-    for elemento in tecnica['elementos']:
+   # Elementos necessários
 
-        if elemento not in entidade['elementos']:
-            print(f'Erro semântico: {nome_entidade} não possui o elemento "{elemento}"')
-            return
+    elementos_necessarios = tecnica.get(
+        'requisitos',
+        tecnica['elementos']
+    )
+
+    for elemento in elementos_necessarios:
+
+        # elemento derivado?
+        if elemento in elementos_derivados:
+
+            requisitos = elementos_derivados[elemento]
+
+            for req in requisitos:
+
+                if req not in entidade['elementos']:
+                    print(
+                        f'Erro semântico: {nome_entidade} não possui o elemento "{req}" '
+                        f'para formar "{elemento}"'
+                    )
+                    return
+
+        else:
+
+            if elemento not in entidade['elementos']:
+                print(
+                    f'Erro semântico: {nome_entidade} não possui o elemento "{elemento}"'
+                )
+                return
 
     # Executa tecnica
     entidade['energia'] -= tecnica['custo']
@@ -379,86 +700,67 @@ entrada = '''
 
 entidade FrostMage {
     energia 500
-    elemento agua
     elemento fogo
     elemento vento
-}
-
-entidade StormKnight {
-    energia 250
-    elemento raio
-    elemento vento
+    elemento agua
+    elemento terra
 }
 
 tecnica fogo_base {
     elementos fogo
-    custo 20
-    dano 50
+    custo 10
+    dano 20
+}
+
+tecnica vento_base {
+    elementos vento
+    custo 15
+    dano 25
 }
 
 tecnica agua_base {
     elementos agua
-    custo 15
-    dano 40
+    custo 5
+    dano 10
 }
 
-tecnica explosao_termica {
-    combinar fogo_base +
-        tecnica chama_sagrada {
-            elementos fogo
-            custo 30
-            dano 80
-        }
+tecnica terra_base {
+    elementos terra
+    custo 12
+    dano 18
 }
 
-tecnica tempestade_arcana {
-    combinar explosao_termica +
-        tecnica gelo_mistico {
-            elementos agua
-            custo 25
-            dano 70
-        }
+tecnica explosao {
+    combinar fogo_base + vento_base
 }
 
-tecnica ritual_supremo {
-    combinar tempestade_arcana +
-        tecnica vento_divino {
-            elementos vento
-            custo 10
-            dano 20
-        }
+tecnica magma {
+    combinar explosao + agua_base
 }
 
-usar FrostMage fogo_base
-usar FrostMage explosao_termica
-usar FrostMage tempestade_arcana
-usar FrostMage ritual_supremo
+tecnica explosao_aprimorada {
+    combinar explosao + fogo_base
+}
 
-usar StormKnight ritual_supremo
+tecnica terremoto {
+    combinar explosao + terra_base
+}
 
+tecnica lava {
+    combinar fogo_base + terra_base
+}
+
+
+usar FrostMage explosao
+usar FrostMage magma
+usar FrostMage explosao_aprimorada
+usar FrostMage terremoto
+usar FrostMage lava
 '''
 
 #Teste de entradas
 
 """
-- Erro léxico: Caractere ilegal '@'
-
-entidade Sasuke {
-    energia @@@
-}
-
-- Erro sintático próximo de "energia". () falta o {
-
-entidade Sakura
-    energia 300
-}
-
-- Erro semântico: Naruto não possui o elemento "agua" (Tentativa de usar o prisao_de_gelo sem o elemento agua)
-- Erro semântico: entidade "Naruto" não existe
-
-usar Naruto prisao_de_gelo
-
-- 
 
 """
 

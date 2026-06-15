@@ -9,6 +9,18 @@ from lexer import tokens
 #A gramática começa em "programa"
 start = 'programa'
 
+import os
+
+# Linha importante para garantir que os códigos de cor funcionem no terminal do Windows
+if os.name == 'nt':
+    os.system('color')
+
+def colorir(texto, rgb, fundo=False):
+    """Pinta o texto ou o fundo usando uma tupla RGB (R, G, B)"""
+    r, g, b = rgb
+    codigo_tipo = 48 if fundo else 38
+    return f"\033[{codigo_tipo};2;{r};{g};{b}m{texto}\033[0m"
+
 # Tabelas de símbolos -> Servem para armazenar informações semânticas
 
 tabela_entidades = {}
@@ -399,34 +411,29 @@ def p_tecnica(p):
             frozenset(elementos_base)
         )
 
+        cor_tecnica = (255, 255, 255)
+
         if fusao:
 
             cor1 = cores_elementos[elementos_base[0]]
             cor2 = cores_elementos[elementos_base[1]]
-            cor_resultado = cores_elementos[fusao]
+            cor_tecnica = cores_elementos[fusao]
+
+            nome1 = colorir(elementos_base[0], cor1)
+            nome2 = colorir(elementos_base[1], cor2)
+            nome_resultado = colorir(fusao, cor_tecnica)
 
             print('\nElementos encontrados:')
             print(elementos_base)
 
-            print('\nFusão elemental')
+            print('\nFusão Elemental')
 
-            print(
-                f'{elementos_base[0]} + {elementos_base[1]}'
-            )
-
-            print(
-                f'→ {fusao}'
-            )
-
-            print('\nRGB')
-
-            print(
-                f'{cor1} + {cor2}'
-            )
-
-            print(
-                f'→ {cor_resultado}'
-            )
+            print(f"{nome1} + {nome2}")
+            print(f"→ {nome_resultado}")
+            
+            print('\nValores RGB:')
+            print(f"{colorir(cor1, cor1)} + {colorir(cor2, cor2)} → {colorir(cor_tecnica, cor_tecnica)}")
+            print('=========================================')
 
             elementos = [fusao]
 
@@ -440,7 +447,7 @@ def p_tecnica(p):
             'dano': dano
         }
 
-        print(f'\nTecnica composta "{nome}" criada!')
+        print(f'\nTecnica composta "{colorir(nome, cor_tecnica)}" criada!')
         print(tabela_tecnicas[nome])
 
         p[0] = nome
@@ -536,7 +543,13 @@ def p_usar(p):
     # Executa tecnica
     entidade['energia'] -= tecnica['custo']
 
-    print(f'\n{nome_entidade} usou {nome_tecnica}!')
+    lista_elem = tecnica.get('elementos', [])
+    cor = (255, 255, 255)  # Branco padrão (caso seja um elemento inventado)
+
+    if lista_elem and lista_elem[0] in cores_elementos:
+        cor = cores_elementos[lista_elem[0]]
+
+    print(f'\n{nome_entidade} usou {colorir(nome_tecnica, cor)}!')
     print(f'Dano causado: {tecnica["dano"]}')
     print(f'energia restante: {entidade["energia"]}')
 
@@ -695,7 +708,7 @@ def p_error(p):
 # Constrói o Parser
 parser = yacc.yacc()
 
-if "__name__" == "__main__":
+if __name__ == "__main__":
     # Entrada de padrão
     entrada_default = '''
 

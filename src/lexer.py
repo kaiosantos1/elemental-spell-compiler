@@ -73,7 +73,7 @@ def t_error(t):
 # Constrói o lexer
 lexer = lex.lex()
 
-if "__name__" == "__main__":
+if __name__ == "__main__":
     # Entrada de teste
     entrada = '''
 

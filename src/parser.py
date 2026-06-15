@@ -6,14 +6,19 @@ import ply.yacc as yacc
 # Importa os tokens do lexer
 from lexer import tokens
 
+import os
+
 #A gramática começa em "programa"
 start = 'programa'
-
-import os
 
 # Linha importante para garantir que os códigos de cor funcionem no terminal do Windows
 if os.name == 'nt':
     os.system('color')
+
+def hex_to_rgb(hex_str):
+    """Converte uma string '#RRGGBB' em uma tupla (R, G, B)"""
+    hex_str = hex_str.lstrip('#')
+    return tuple(int(hex_str[i:i+2], 16) for i in (0, 2, 4))
 
 def colorir(texto, rgb, fundo=False):
     """Pinta o texto ou o fundo usando uma tupla RGB (R, G, B)"""
@@ -365,6 +370,7 @@ def p_tecnica(p):
         elementos_base = []
         custo = 0
         dano = 0
+        cores_sub_tecnicas = []
 
         # Flatten das combinações recursivas
         tecnicas_planas = []
@@ -394,6 +400,11 @@ def p_tecnica(p):
             custo += tecnica_base['custo']
             dano += tecnica_base['dano']
 
+            if 'cor' in tecnica_base and tecnica_base['cor']:
+                cores_sub_tecnicas.append(tecnica_base['cor'])
+            else:
+                cores_sub_tecnicas.append((255, 255, 255))
+
             for e in tecnica_base['elementos']:
                 if e not in elementos_base:
                     elementos_base.append(e)
@@ -411,25 +422,30 @@ def p_tecnica(p):
             frozenset(elementos_base)
         )
 
-        cor_tecnica = (255, 255, 255)
+        if cores_sub_tecnicas:
+            r = sum(c[0] for c in cores_sub_tecnicas) // len(cores_sub_tecnicas)
+            g = sum(c[1] for c in cores_sub_tecnicas) // len(cores_sub_tecnicas)
+            b = sum(c[2] for c in cores_sub_tecnicas) // len(cores_sub_tecnicas)
+            cor_tecnica = (r, g, b)
+        else:
+            cor_tecnica = (255, 255, 255)
 
         if fusao:
 
-            cor1 = cores_elementos[elementos_base[0]]
-            cor2 = cores_elementos[elementos_base[1]]
-            cor_tecnica = cores_elementos[fusao]
+            cor1 = cores_sub_tecnicas[0] if len(cores_sub_tecnicas) > 0 else (255, 255, 255)
+            cor2 = cores_sub_tecnicas[1] if len(cores_sub_tecnicas) > 1 else (255, 255, 255)
 
-            nome1 = colorir(elementos_base[0], cor1)
-            nome2 = colorir(elementos_base[1], cor2)
-            nome_resultado = colorir(fusao, cor_tecnica)
+            element1 = colorir(elementos_base[0], cor1)
+            element2 = colorir(elementos_base[1], cor2)
+            cor_result = colorir(fusao, cor_tecnica)
 
             print('\nElementos encontrados:')
             print(elementos_base)
 
             print('\nFusão Elemental')
 
-            print(f"{nome1} + {nome2}")
-            print(f"→ {nome_resultado}")
+            print(f"{element1} + {element2}")
+            print(f"→ {cor_result}")
             
             print('\nValores RGB:')
             print(f"{colorir(cor1, cor1)} + {colorir(cor2, cor2)} → {colorir(cor_tecnica, cor_tecnica)}")
@@ -439,12 +455,17 @@ def p_tecnica(p):
 
         else:
             elementos = elementos_base
+            if elementos_base and elementos_base[0] in cores_elementos:
+                cor_tecnica = cores_elementos[elementos_base[0]]
+            else:
+                cor_tecnica = (255, 255, 255)
 
         tabela_tecnicas[nome] = {
             'elementos': elementos,
             'requisitos': elementos_base,
             'custo': custo,
-            'dano': dano
+            'dano': dano,
+            'cor': cor_tecnica
         }
 
         print(f'\nTecnica composta "{colorir(nome, cor_tecnica)}" criada!')
@@ -459,7 +480,8 @@ def p_tecnica(p):
     tabela_tecnicas[nome] = {
         'elementos': [],
         'custo': 0,
-        'dano': 0
+        'dano': 0,
+        'cor': None
     }
 
     for propriedade in dados:
@@ -476,7 +498,21 @@ def p_tecnica(p):
         elif tipo == 'dano':
             tabela_tecnicas[nome]['dano'] = valor
 
-    print(f'\nTecnica "{nome}" criada!')
+        elif tipo == 'cor':
+            tabela_tecnicas[nome]['cor'] = valor
+
+
+    cor_simples = tabela_tecnicas[nome]['cor']
+
+    if not cor_simples:
+        lista_elem = tabela_tecnicas[nome]['elementos']
+        cor_simples = (255, 255, 255)
+        if lista_elem and lista_elem[0] in cores_elementos:
+            cor_simples = cores_elementos[lista_elem[0]]
+
+    tabela_tecnicas[nome]['cor'] = cor_simples
+
+    print(f'\nTecnica "{colorir(nome, cor_simples)}" criada!')
     print(tabela_tecnicas[nome])
 
     p[0] = nome
@@ -542,12 +578,7 @@ def p_usar(p):
 
     # Executa tecnica
     entidade['energia'] -= tecnica['custo']
-
-    lista_elem = tecnica.get('elementos', [])
-    cor = (255, 255, 255)  # Branco padrão (caso seja um elemento inventado)
-
-    if lista_elem and lista_elem[0] in cores_elementos:
-        cor = cores_elementos[lista_elem[0]]
+    cor = tecnica.get('cor', (255, 255, 255))
 
     print(f'\n{nome_entidade} usou {colorir(nome_tecnica, cor)}!')
     print(f'Dano causado: {tecnica["dano"]}')
@@ -695,6 +726,12 @@ def p_propriedade_elementos(p):
     '''
 
     p[0] = ('elementos', p[2])
+
+def p_propriedade_cor(p):
+    '''
+    propriedade : COR HEXCODE
+    '''
+    p[0] = ('cor', hex_to_rgb(p[2]))
 
 
 # Erro síntatico

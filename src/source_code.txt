@@ -10,11 +10,13 @@ tecnica EXPLOSION{
         elementos vento
         custo 0
         dano 0
+        cor #0ae6ff
     } +
     tecnica ignition {
         elementos fogo
         custo 1000
         dano 10000
+        cor #0000FF
     }
 }
 

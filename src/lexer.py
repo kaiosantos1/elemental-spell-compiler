@@ -15,6 +15,7 @@ reserved = {
     'elementos': 'ELEMENTOS',
     'custo': 'CUSTO',
     'dano': 'DANO',
+    'cor': 'COR',
     'usar': 'USAR',
     'combinar':'COMBINAR'
 }
@@ -27,7 +28,8 @@ tokens = [
     'NUMERO',
     'LBRACE',
     'RBRACE',
-    'PLUS'
+    'PLUS',
+    'HEXCODE'
 ] + list(reserved.values())
 
 
@@ -37,6 +39,7 @@ tokens = [
 t_LBRACE = r'\{'
 t_RBRACE = r'\}'
 t_PLUS = r'\+'
+t_HEXCODE = r'\#[0-9a-fA-F]{6}'
 
 # Ignorar espaços e TAB
 t_ignore = ' \t'

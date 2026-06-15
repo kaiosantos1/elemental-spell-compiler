@@ -73,26 +73,27 @@ def t_error(t):
 # Constrói o lexer
 lexer = lex.lex()
 
-# Entrada de teste
-entrada = '''
+if "__name__" == "__main__":
+    # Entrada de teste
+    entrada = '''
 
-entidade FrostMage {
-    energia 500
-    elemento agua
-    elemento fogo
-}
+    entidade FrostMage {
+        energia 500
+        elemento agua
+        elemento fogo
+    }
 
-tecnica fogo_base {
-    elementos fogo
-    custo 20
-    dano 50
-}
+    tecnica fogo_base {
+        elementos fogo
+        custo 20
+        dano 50
+    }
 
-usar FrostMage fogo_base
-'''
+    usar FrostMage fogo_base
+    '''
 
-# Teste do lexer
-lexer.input(entrada)
+    # Teste do lexer
+    lexer.input(entrada)
 
-for token in lexer:
-    print(token)
+    for token in lexer:
+        print(token)

@@ -695,82 +695,83 @@ def p_error(p):
 # Constrói o Parser
 parser = yacc.yacc()
 
-# Entrada de teste
-entrada = '''
+if "__name__" == "__main__":
+    # Entrada de padrão
+    entrada_default = '''
 
-entidade FrostMage {
-    energia 500
-    elemento fogo
-    elemento vento
-    elemento agua
-    elemento terra
-}
+    entidade FrostMage {
+        energia 500
+        elemento fogo
+        elemento vento
+        elemento agua
+        elemento terra
+    }
 
-tecnica fogo_base {
-    elementos fogo
-    custo 10
-    dano 20
-}
+    tecnica fogo_base {
+        elementos fogo
+        custo 10
+        dano 20
+    }
 
-tecnica vento_base {
-    elementos vento
-    custo 15
-    dano 25
-}
+    tecnica vento_base {
+        elementos vento
+        custo 15
+        dano 25
+    }
 
-tecnica agua_base {
-    elementos agua
-    custo 5
-    dano 10
-}
+    tecnica agua_base {
+        elementos agua
+        custo 5
+        dano 10
+    }
 
-tecnica terra_base {
-    elementos terra
-    custo 12
-    dano 18
-}
+    tecnica terra_base {
+        elementos terra
+        custo 12
+        dano 18
+    }
 
-tecnica explosao {
-    combinar fogo_base + vento_base
-}
+    tecnica explosao {
+        combinar fogo_base + vento_base
+    }
 
-tecnica magma {
-    combinar explosao + agua_base
-}
+    tecnica magma {
+        combinar explosao + agua_base
+    }
 
-tecnica explosao_aprimorada {
-    combinar explosao + fogo_base
-}
+    tecnica explosao_aprimorada {
+        combinar explosao + fogo_base
+    }
 
-tecnica terremoto {
-    combinar explosao + terra_base
-}
+    tecnica terremoto {
+        combinar explosao + terra_base
+    }
 
-tecnica lava {
-    combinar fogo_base + terra_base
-}
-
-
-usar FrostMage explosao
-usar FrostMage magma
-usar FrostMage explosao_aprimorada
-usar FrostMage terremoto
-usar FrostMage lava
-'''
-
-#Teste de entradas
-
-"""
-
-"""
+    tecnica lava {
+        combinar fogo_base + terra_base
+    }
 
 
-# Execução
-parser.parse(entrada)
+    usar FrostMage explosao
+    usar FrostMage magma
+    usar FrostMage explosao_aprimorada
+    usar FrostMage terremoto
+    usar FrostMage lava
+    '''
 
-# Mostra tabela final
-print('\nTabela de entidades:')
-print(tabela_entidades)
+    #Teste de entradas
 
-print('\nTabela de Tecnicas:')
-print(tabela_tecnicas)
+    """
+
+    """
+
+
+    # Execução
+    parser.parse(entrada_default)
+
+    # Mostra tabela final
+    print('\nTabela de entidades:')
+    print(tabela_entidades)
+
+    print('\nTabela de Tecnicas:')
+    print(tabela_tecnicas)

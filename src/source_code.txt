@@ -1,0 +1,21 @@
+entidade Megumin{
+    energia 1000
+    elemento fogo
+    elemento vento
+}
+
+tecnica EXPLOSION{
+    combinar 
+    tecnica fuel {
+        elementos vento
+        custo 0
+        dano 0
+    } +
+    tecnica ignition {
+        elementos fogo
+        custo 1000
+        dano 10000
+    }
+}
+
+usar Megumin EXPLOSION

@@ -20,4 +20,4 @@ docs/ → gramática, árvores e documentação formal
 ## Execução
 
 ```bash
-python parser.py
+python main.py [nome_do_arquivo_a_compilar]

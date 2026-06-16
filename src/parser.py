@@ -7,6 +7,7 @@ import ply.yacc as yacc
 from lexer import tokens
 
 import os
+import math
 
 #A gramática começa em "programa"
 start = 'programa'
@@ -31,9 +32,12 @@ def colorir(texto, rgb, fundo=False):
 tabela_entidades = {}
 tabela_tecnicas = {}
 
-tabela_fusoes = {
+BASES_PURAS = {'fogo', 'vento', 'agua', 'terra', 'raio'}
 
-    # 1. Combinações Base + Base (2 Elementos)
+tabela_fusoes = {
+    # =========================================================================
+    # 2 Elementos Base
+    # =========================================================================
     frozenset(['fogo', 'vento']): 'explosao',
     frozenset(['fogo', 'agua']): 'vapor',
     frozenset(['fogo', 'terra']): 'lava',
@@ -46,241 +50,242 @@ tabela_fusoes = {
     frozenset(['vento', 'terra']): 'areia',
     frozenset(['vento', 'raio']): 'tempestade',
     
-    frozenset(['raio', 'terra']): 'cristal',
+    frozenset(['raio', 'terra']): 'magnetismo',
 
+    # =========================================================================
+    # 3 Elementos Base
+    # =========================================================================
+    frozenset(['fogo', 'vento', 'agua']): 'magma',
+    frozenset(['fogo', 'vento', 'terra']): 'terremoto',
+    frozenset(['fogo', 'vento', 'raio']): 'cristal',
+    frozenset(['fogo', 'agua', 'terra']): 'obsidiana',
+    frozenset(['fogo', 'agua', 'raio']): 'radiacao',
+    frozenset(['fogo', 'terra', 'raio']): 'meteorito',
+    frozenset(['vento', 'agua', 'terra']): 'permafrost',
+    frozenset(['vento', 'agua', 'raio']): 'furacao',
+    frozenset(['vento', 'terra', 'raio']): 'fulgurito',
+    frozenset(['agua', 'terra', 'raio']): 'pantano',
 
-    # 2. Combinações derivadas + Base
+    # =========================================================================
+    # 4 Elementos Base
+    # =========================================================================
+    frozenset(['fogo', 'vento', 'agua', 'terra']): 'cataclisma',
+    frozenset(['fogo', 'vento', 'agua', 'raio']): 'decaimento',
+    frozenset(['fogo', 'vento', 'terra', 'raio']): 'supernova',
+    frozenset(['fogo', 'agua', 'terra', 'raio']): 'miasma',
+    frozenset(['vento', 'agua', 'terra', 'raio']): 'vortice',
 
-    # Explosão (Fogo + Vento)
-    frozenset(['explosao', 'fogo']): 'explosao',       
-    frozenset(['explosao', 'vento']): 'explosao', 
-    frozenset(['explosao', 'explosao']): 'explosao',
-    frozenset(['explosao', 'agua']): 'magma',     
-    frozenset(['explosao', 'terra']): 'terremoto',     
-    frozenset(['explosao', 'raio']): 'supernova',      
-
-    # Vapor (Fogo + Agua)
-    frozenset(['vapor', 'fogo']): 'vapor',
-    frozenset(['vapor', 'agua']): 'vapor',
-    frozenset(['vapor', 'vapor']): 'vapor',
-    frozenset(['vapor', 'vento']): 'nevoa',           
-    frozenset(['vapor', 'terra']): 'geiser', 
-    frozenset(['vapor', 'raio']): 'nevoa_acida',
-
-    # Lava (Fogo + Terra)
-    frozenset(['lava', 'fogo']): 'lava',
-    frozenset(['lava', 'terra']): 'lava',
-    frozenset(['lava', 'lava']): 'lava',
-    frozenset(['lava', 'agua']): 'obsidiana', 
-    frozenset(['lava', 'vento']): 'cinzas', 
-    frozenset(['lava', 'raio']): 'meteorito',  
-
-    # Plasma (Fogo + Raio)
-    frozenset(['plasma', 'fogo']): 'plasma',
-    frozenset(['plasma', 'raio']): 'plasma',
-    frozenset(['plasma', 'plasma']): 'plasma',
-    frozenset(['plasma', 'agua']): 'radiacao',      
-    frozenset(['plasma', 'vento']): 'laser',    
-    frozenset(['plasma', 'terra']): 'metal_liquido', 
-
-    # Gelo (Agua + Vento)
-    frozenset(['gelo', 'agua']): 'gelo',
-    frozenset(['gelo', 'vento']): 'gelo',
-    frozenset(['gelo', 'gelo']): 'gelo',
-    frozenset(['gelo', 'fogo']): 'gelo_seco',         
-    frozenset(['gelo', 'terra']): 'permafrost',    
-    frozenset(['gelo', 'raio']): 'ventania_polar',  
-
-    # Lama (Agua + Terra)
-    frozenset(['lama', 'agua']): 'lama',
-    frozenset(['lama', 'terra']): 'lama',
-    frozenset(['lama', 'lama']): 'lama',
-    frozenset(['lama', 'fogo']): 'argila',             
-    frozenset(['lama', 'vento']): 'poeira',           
-    frozenset(['lama', 'raio']): 'areia_movedica',    
-
-    # Tormenta (Agua + Raio)
-    frozenset(['tormenta', 'agua']): 'tormenta',
-    frozenset(['tormenta', 'raio']): 'tormenta',
-    frozenset(['tormenta', 'tormenta']): 'tormenta',
-    frozenset(['tormenta', 'fogo']): 'chuva_acida',   
-    frozenset(['tormenta', 'vento']): 'furaçao',  
-    frozenset(['tormenta', 'terra']): 'pântano',    
-
-    # Areia (Vento + Terra)
-    frozenset(['areia', 'vento']): 'areia',
-    frozenset(['areia', 'terra']): 'areia',
-    frozenset(['areia', 'areia']): 'areia',
-    frozenset(['areia', 'fogo']): 'vidro',     
-    frozenset(['areia', 'agua']): 'lodo',     
-    frozenset(['areia', 'raio']): 'fulgurito',     
-
-    # Tempestade (Vento + Raio)
-    frozenset(['tempestade', 'vento']): 'tempestade',
-    frozenset(['tempestade', 'raio']): 'tempestade',
-    frozenset(['tempestade', 'tempestade']): 'tempestade',
-    frozenset(['tempestade', 'fogo']): 'incendio',    
-    frozenset(['tempestade', 'agua']): 'diluvio',
-    frozenset(['tempestade', 'terra']): 'desabamento',  
-
-    # Cristal (Raio + Terra)
-    frozenset(['cristal', 'raio']): 'cristal',
-    frozenset(['cristal', 'terra']): 'cristal',
-    frozenset(['cristal', 'cristal']): 'cristal',
-    frozenset(['cristal', 'fogo']): 'rubi',          
-    frozenset(['cristal', 'agua']): 'prisma',      
-    frozenset(['cristal', 'vento']): 'som_sonico' 
-
-
-    
+    # =========================================================================
+    # Singularidade
+    # =========================================================================
+    frozenset(['fogo', 'vento', 'agua', 'terra', 'raio']): 'Caos'
 }
 
 cores_elementos = {
+    # =========================================================================
+    # Elementos Base
+    # =========================================================================
+    'fogo': (255, 80, 0),          # Laranja avermelhado
+    'agua': (0, 140, 255),         # Azul vivo
+    'vento': (200, 240, 255),      # Azul-esbranquiçado
+    'terra': (120, 72, 32),        # Marrom
+    'raio': (255, 255, 80),        # Amarelo elétrico
 
-    # 1. Elementos Base
+    # =========================================================================
+    # 2 Elementos Base
+    # =========================================================================
+    'explosao': (255, 170, 0),     # Laranja brilhante
+    'vapor': (220, 220, 220),      # Cinza claro
+    'lava': (255, 50, 0),          # Vermelho-lava
+    'plasma': (255, 0, 255),       # Magenta energético
 
-    'fogo': (255, 69, 0),          # Vermelho Alaranjado
-    'agua': (30, 144, 255),        # Azul Esquilo
-    'vento': (240, 230, 140),      # Amarelo Cáqui Claro
-    'raio': (138, 43, 226),        # Roxo Violeta
-    'terra': (139, 69, 19),        # Marrom Sela
+    'gelo': (170, 240, 255),       # Azul gelo
+    'lama': (102, 76, 51),         # Marrom escuro
+    'tormenta': (50, 80, 180),     # Azul tempestuoso
 
-    # 2. Elementos derivados de 2 vias (Base + Base)
+    'areia': (230, 210, 120),      # Bege
+    'tempestade': (120, 120, 200), # Azul arroxeado
+    'magnetismo': (180, 0, 180),   # Roxo magnético
 
-    'explosao': (255, 140, 0),     # Laranja Escuro (Fogo + Vento)
-    'vapor': (220, 220, 220),      # Branco Cinzento (Fogo + Água)
-    'lava': (226, 88, 34),         # Laranja Vulcânico (Fogo + Terra)
-    'plasma': (255, 0, 128),       # Rosa Choque (Fogo + Raio)
-    'gelo': (0, 255, 255),         # Ciano (Água + Vento)
-    'lama': (101, 67, 33),         # Marrom Escuro (Água + Terra)
-    'tormenta': (72, 61, 139),     # Azul Escuro Purpúreo  (Água + Raio)
-    'areia': (238, 214, 175),      # Bege Areia (Vento + Terra)
-    'tempestade': (112, 128, 144), # Cinza Ardósia (Vento + Raio)
-    'cristal': (186, 85, 211),     # Orquídea Média (Raio + Terra)
+    # =========================================================================
+    # 3 Elementos Base
+    # =========================================================================
+    'magma': (255, 100, 0),        # Laranja incandescente
+    'terremoto': (90, 50, 40),     # Marrom escuro
+    'cristal': (180, 255, 255),    # Ciano cristalino
+    'obsidiana': (25, 20, 35),     # Preto arroxeado
+    'radiacao': (0, 255, 80),      # Verde radioativo
+    'meteorito': (100, 90, 110),   # Cinza espacial
+    'permafrost': (190, 230, 255), # Azul congelado
+    'furacao': (80, 180, 220),     # Azul-turquesa
+    'fulgurito': (255, 220, 120),  # Dourado vítreo
+    'pantano': (70, 110, 40),      # Verde musgo
 
-    # 3. Elementos derivados de 3 vias (Derivado + Base)
-    
-    # Derivados de Explosão
-    'magma': (178, 34, 34),        # Vermelho Tijolo
-    'terremoto': (74, 53, 41),     # Marrom Profundo
-    'supernova': (255, 255, 204),  # Amarelo Estelar Pálido 
+    # =========================================================================
+    # 4 Elementos Base
+    # =========================================================================
+    'cataclisma': (180, 30, 30),   # Vermelho destrutivo
+    'decaimento': (110, 255, 110), # Verde pálido
+    'supernova': (255, 255, 255),  # Branco estelar
+    'miasma': (100, 60, 120),      # Roxo sombrio
+    'vortice': (60, 100, 180),     # Azul profundo
 
-    # Derivados de Vapor
-    'nevoa': (245, 245, 245),      # Branco Fumaça 
-    'geiser': (175, 238, 238),     # Turquesa Pálido
-    'nevoa_acida': (152, 251, 152),# Verde Pálido Elétrico
-
-    # Derivados de Lava
-    'obsidiana': (21, 21, 21),     # Preto Vidro Vulcânico
-    'cinzas': (169, 169, 169),     # Cinza Escuro 
-    'meteorito': (105, 105, 105),  # Cinza Carbono
-
-    # Derivados de Plasma
-    'radiacao': (50, 205, 50),     # Verde Lima Fluorescente
-    'laser': (255, 0, 0),          # Vermelho Puro Concentrado
-    'metal_liquido': (212, 175, 55),# Ouro Metálico 
-
-    # Derivados de Gelo
-    'gelo_seco': (240, 248, 255),  # Branco Gelo 
-    'permafrost': (95, 158, 160),  # Azul Cadete 
-    'ventania_polar': (176, 224, 230),# Azul Pó 
-
-    # Derivados de Lama
-    'argila': (210, 105, 30),      # Chocolate 
-    'poeira': (222, 184, 135),     # Madeiro Claro 
-    'areia_movedica': (188, 143, 143),# Rosado Argiloso 
-
-    # Derivados de Tormenta
-    'chuva_acida': (127, 255, 0),  # Verde Amarelado Ácido 
-    'furaçao': (47, 79, 79),       # Verde Ardósia Escuro
-    'pântano': (46, 139, 87),      # Verde Mar
-
-    # Derivados de Areia
-    'vidro': (143, 188, 143),      # Verde Mar Escuro
-    'lodo': (85, 107, 47),         # Verde Oliva Escuro
-    'fulgurito': (205, 133, 63),   # Bronze Natural
-
-    # Derivados de Tempestade
-    'incendio': (255, 0, 0),       # Vermelho Vivo
-    'diluvio': (0, 0, 128),        # Azul Marinho Profundo 
-    'desabamento': (112, 105, 89), # Cinza Castanho 
-
-    # Derivados de Cristal
-    'rubi': (156, 0, 48),          # Vermelho Rubi Profundo
-    'prisma': (255, 192, 203),     # Rosa Claro Refratado
-    'som_sonico': (230, 230, 250)  # Lavanda Pálido 
+    # =========================================================================
+    # Singularidade
+    # =========================================================================
+    'Caos': (20, 20, 20),          # Preto absoluto
 }
 
-elementos_derivados = {
-   
-    # 1. Derivados de 2 vias (Base + Base)
+fusoes_inversas = {v: k for k, v in tabela_fusoes.items()}
 
-    'explosao': ['fogo', 'vento'],
-    'vapor': ['fogo', 'agua'],
-    'lava': ['fogo', 'terra'],
-    'plasma': ['fogo', 'raio'],
-    
-    'gelo': ['agua', 'vento'],
-    'lama': ['agua', 'terra'],
-    'tormenta': ['agua', 'raio'],
-    
-    'areia': ['vento', 'terra'],
-    'tempestade': ['vento', 'raio'],
-    
-    'cristal': ['raio', 'terra'],
+def interpola_cor(lista_rgb):
+    """Recebe uma lista de tuplas (R, G, B) reais e faz a média quadrática delas"""    
+    r, g, b = 0, 0, 0
+    for cor in lista_rgb:
+        r += cor[0] ** 2
+        g += cor[1] ** 2
+        b += cor[2] ** 2
+        
+    n = len(lista_rgb)
+    return (
+        int(math.sqrt(r / n)),
+        int(math.sqrt(g / n)),
+        int(math.sqrt(b / n))
+    )
 
-    # 2. Derivados de 3 vias (Derivado + Base)
-    
-    # Derivados de Explosão
-    'magma': ['explosao', 'agua'],
-    'terremoto': ['explosao', 'terra'],
-    'supernova': ['explosao', 'raio'],
+#Todos os elementos
+elementos_validos = set()
 
-    # Derivados de Vapor
-    'nevoa': ['vapor', 'vento'],
-    'geiser': ['vapor', 'terra'],
-    'nevoa_acida': ['vapor', 'raio'],
+# Pega os elementos base e os resultados da tabela de fusões
+for componentes, resultado in tabela_fusoes.items():
+    elementos_validos.update(componentes)
+    elementos_validos.add(resultado)
 
-    # Derivados de Lava
-    'obsidiana': ['lava', 'agua'],
-    'cinzas': ['lava', 'vento'],
-    'meteorito': ['lava', 'raio'],
+def decay(elemento):
+    """Retorna o conjunto de bases puras que compõem um elemento (puro ou já fundido)"""
+    if elemento in BASES_PURAS:
+        return {elemento}
 
-    # Derivados de Plasma
-    'radiacao': ['plasma', 'agua'],
-    'laser': ['plasma', 'vento'],
-    'metal_liquido': ['plasma', 'terra'],
+    return set(fusoes_inversas[elemento])
 
-    # Derivados de Gelo
-    'gelo_seco': ['gelo', 'fogo'],
-    'permafrost': ['gelo', 'terra'],
-    'ventania_polar': ['gelo', 'raio'],
+def fusao(elementos):
+    """
+    Decai uma lista de elementos até suas bases puras
+    e retorna o elemento resultante da fusão máxima dessas bases e sua cor
+    """
 
-    # Derivados de Lama
-    'argila': ['lama', 'fogo'],
-    'poeira': ['lama', 'vento'],
-    'areia_movedica': ['lama', 'raio'],
+    bases_unicas = set()
+    for elemento in elementos:
+        bases_unicas.update(decay(elemento))
 
-    # Derivados de Tormenta
-    'chuva_acida': ['tormenta', 'fogo'],
-    'furaçao': ['tormenta', 'vento'],
-    'pântano': ['tormenta', 'terra'],
+    elemento_resultado = tabela_fusoes[frozenset(bases_unicas)]
+    return elemento_resultado, cores_elementos[elemento_resultado]
 
-    # Derivados de Areia
-    'vidro': ['areia', 'fogo'],
-    'lodo': ['areia', 'agua'],
-    'fulgurito': ['areia', 'raio'],
 
-    # Derivados de Tempestade
-    'incendio': ['tempestade', 'fogo'],
-    'diluvio': ['tempestade', 'agua'],
-    'desabamento': ['tempestade', 'terra'],
+def criar_tecnica_simples(nome, propriedades):
+    """ Cria uma técnica simples """
+    elementos_raw = []
+    custo = 0
+    dano = 0
+    cor_usuario = None
 
-    # Derivados de Cristal
-    'rubi': ['cristal', 'fogo'],
-    'prisma': ['cristal', 'agua'],
-    'som_sonico': ['cristal', 'vento']
-}
+    for tipo, valor in propriedades:
+        if tipo == 'elementos':
+            elementos_raw = valor
+        elif tipo == 'custo':
+            custo = valor
+        elif tipo == 'dano':
+            dano = valor
+        elif tipo == 'cor':
+            cor_usuario = valor
+
+    if not elementos_raw:
+        print(f'Erro semântico: a técnica "{nome}" precisa de ao menos um elemento.')
+        return None
+
+    for elemento in elementos_raw:
+        if elemento not in elementos_validos:
+            print(f'Erro semântico: O elemento "{elemento}" na técnica "{nome}" não existe nas regras do sistema.')
+            return None
+
+    # Remove duplicados preservando a ordem de definição
+    elementos_unicos = list(dict.fromkeys(elementos_raw))
+
+    if len(elementos_unicos) > 1:
+        elemento_final, cor_tabela = fusao(elementos_unicos)
+    else:
+        elemento_final = elementos_unicos[0]
+        cor_tabela = cores_elementos[elemento_final]
+
+    cor_manual = cor_usuario is not None
+    cor_final = cor_usuario if cor_manual else cor_tabela
+
+    tabela_tecnicas[nome] = {
+        'elementos': [elemento_final],
+        'custo': custo,
+        'dano': dano,
+        'cor': cor_final,
+        'cor_manual': cor_manual,
+    }
+
+    print(f'\nTecnica "{colorir(nome, cor_final)}" criada!')
+    print(tabela_tecnicas[nome])
+    return nome
+
+
+def criar_tecnica_composta(nome, nomes_tecnicas):
+    """ Cria uma técnica composta a partir da combinação de técnicas já existentes """
+    elementos_base = []
+    custo = 0
+    dano = 0
+    cores_sub_tecnicas = []
+    cor_manual = False
+
+    for nome_tecnica in nomes_tecnicas:
+
+        if nome_tecnica not in tabela_tecnicas:
+            print(f'Erro semântico: técnica "{nome_tecnica}" não existe')
+            return None
+
+        tecnica_base = tabela_tecnicas[nome_tecnica]
+        custo += tecnica_base['custo']
+        dano += tecnica_base['dano']
+        cores_sub_tecnicas.append(tecnica_base['cor'])
+        cor_manual = cor_manual or tecnica_base['cor_manual']
+        elementos_base.extend(tecnica_base['elementos'])
+
+    # Remove duplicados das bases antes de mandar para a fusão (caso combinem técnicas do mesmo elemento)
+    elementos_base = list(dict.fromkeys(elementos_base))
+
+    if len(elementos_base) > 1:
+        elemento_final, cor_tabela = fusao(elementos_base)
+    else:
+        elemento_final = elementos_base[0]
+        cor_tabela = cores_elementos[elemento_final]
+
+    # Se nenhuma das técnicas combinadas tem cor definida manualmente (direta ou
+    # herdada de uma combinação anterior), usa-se a cor de tabela do resultado.
+    # Caso ao menos uma tenha, interpola-se as cores das técnicas combinadas.
+    cor_final = interpola_cor(cores_sub_tecnicas) if cor_manual else cor_tabela
+
+    tabela_tecnicas[nome] = {
+        'elementos': [elemento_final],
+        'custo': custo,
+        'dano': dano,
+        'cor': cor_final,
+        'cor_manual': cor_manual,
+    }
+
+    partes_coloridas = [colorir(nomes_tecnicas[i], cores_sub_tecnicas[i]) for i in range(len(nomes_tecnicas))]
+    print('\n--- Fusão Elemental Realizada ---')
+    print(' + '.join(partes_coloridas))
+    print(f'→ {colorir(elemento_final, cor_final)}')
+    print('=========================================')
+
+    print(f'\nTecnica composta "{colorir(nome, cor_final)}" criada!')
+    print(tabela_tecnicas[nome])
+    return nome
+
 
 # Programa -> Para ser possível utilizar mais de uma declaração, como uma declaração de entidade ou uma de técnica
 
@@ -328,24 +333,29 @@ def p_entidade(p):
     nome = p[2]
     atributos = p[4]
 
-    tabela_entidades[nome] = {
-        'energia': 0,
-        'elementos': []
-    }
+    energia = 0
+    elementos_raw = []
 
-    for atributo in atributos:
-
-        tipo = atributo[0]
-        valor = atributo[1]
+    for tipo, valor in atributos:
 
         # Energia
         if tipo == 'energia':
-            tabela_entidades[nome]['energia'] = valor
-
+            energia = valor
 
         # Elementos
         elif tipo == 'elemento':
-            tabela_entidades[nome]['elementos'].append(valor)
+            if valor not in elementos_validos:
+                print(f'Erro semântico: O elemento "{valor}" atribuído à entidade "{nome}" não existe nas regras do sistema.')
+                return
+
+            elementos_raw.append(valor)
+
+    # Os elementos da entidade ficam exatamente como foram definidos, só removendo duplicados.
+    # Não há fusão nem decaimento, precisando ter o exato elemento de uma técnica para usa-la
+    tabela_entidades[nome] = {
+        'energia': energia,
+        'elementos': list(dict.fromkeys(elementos_raw)),
+    }
 
     print(f'\nEntidade "{nome}" criado!')
     print(tabela_entidades[nome])
@@ -358,164 +368,15 @@ def p_tecnica(p):
     '''
 
     nome = p[2]
-    dados = p[4]
+    tipo_corpo, dados = p[4]
 
-    # Técnica composta
-    if (
-        isinstance(dados, list)
-        and len(dados) > 0
-        and not isinstance(dados[0], tuple)
-    ):
+    if tipo_corpo == 'combinacao':
+        resultado = criar_tecnica_composta(nome, dados)
+    else:
+        resultado = criar_tecnica_simples(nome, dados)
 
-        elementos_base = []
-        custo = 0
-        dano = 0
-        cores_sub_tecnicas = []
-
-        # Flatten das combinações recursivas
-        tecnicas_planas = []
-
-        for item in dados:
-
-            if isinstance(item, list):
-
-                tecnicas_planas.extend(item)
-
-            else:
-
-                
-                tecnicas_planas.append(item)
-
-        for nome_tecnica in tecnicas_planas:
-
-            if nome_tecnica not in tabela_tecnicas:
-
-                print(
-                    f'Erro semântico: técnica "{nome_tecnica}" não existe'
-                )
-                return
-
-            tecnica_base = tabela_tecnicas[nome_tecnica]
-
-            custo += tecnica_base['custo']
-            dano += tecnica_base['dano']
-
-            if 'cor' in tecnica_base and tecnica_base['cor']:
-                cores_sub_tecnicas.append(tecnica_base['cor'])
-            else:
-                cores_sub_tecnicas.append((255, 255, 255))
-
-            for e in tecnica_base['elementos']:
-                if e not in elementos_base:
-                    elementos_base.append(e)
-
-        if len(elementos_base) > 2:
-
-            print(
-                f'Erro semântico: fusões suportam no máximo 2 elementos. '
-                f'Elementos recebidos: {elementos_base}'
-            )
-
-            return
-
-        fusao = tabela_fusoes.get(
-            frozenset(elementos_base)
-        )
-
-        if cores_sub_tecnicas:
-            r = sum(c[0] for c in cores_sub_tecnicas) // len(cores_sub_tecnicas)
-            g = sum(c[1] for c in cores_sub_tecnicas) // len(cores_sub_tecnicas)
-            b = sum(c[2] for c in cores_sub_tecnicas) // len(cores_sub_tecnicas)
-            cor_tecnica = (r, g, b)
-        else:
-            cor_tecnica = (255, 255, 255)
-
-        if fusao:
-
-            cor1 = cores_sub_tecnicas[0] if len(cores_sub_tecnicas) > 0 else (255, 255, 255)
-            cor2 = cores_sub_tecnicas[1] if len(cores_sub_tecnicas) > 1 else (255, 255, 255)
-
-            element1 = colorir(elementos_base[0], cor1)
-            element2 = colorir(elementos_base[1], cor2)
-            cor_result = colorir(fusao, cor_tecnica)
-
-            print('\nElementos encontrados:')
-            print(elementos_base)
-
-            print('\nFusão Elemental')
-
-            print(f"{element1} + {element2}")
-            print(f"→ {cor_result}")
-            
-            print('\nValores RGB:')
-            print(f"{colorir(cor1, cor1)} + {colorir(cor2, cor2)} → {colorir(cor_tecnica, cor_tecnica)}")
-            print('=========================================')
-
-            elementos = [fusao]
-
-        else:
-            elementos = elementos_base
-            if elementos_base and elementos_base[0] in cores_elementos:
-                cor_tecnica = cores_elementos[elementos_base[0]]
-            else:
-                cor_tecnica = (255, 255, 255)
-
-        tabela_tecnicas[nome] = {
-            'elementos': elementos,
-            'requisitos': elementos_base,
-            'custo': custo,
-            'dano': dano,
-            'cor': cor_tecnica
-        }
-
-        print(f'\nTecnica composta "{colorir(nome, cor_tecnica)}" criada!')
-        print(tabela_tecnicas[nome])
-
-        p[0] = nome
-        return
-
-
-    # Técnica simples
-
-    tabela_tecnicas[nome] = {
-        'elementos': [],
-        'custo': 0,
-        'dano': 0,
-        'cor': None
-    }
-
-    for propriedade in dados:
-
-        tipo = propriedade[0]
-        valor = propriedade[1]
-
-        if tipo == 'elementos':
-            tabela_tecnicas[nome]['elementos'] = valor
-
-        elif tipo == 'custo':
-            tabela_tecnicas[nome]['custo'] = valor
-
-        elif tipo == 'dano':
-            tabela_tecnicas[nome]['dano'] = valor
-
-        elif tipo == 'cor':
-            tabela_tecnicas[nome]['cor'] = valor
-
-
-    cor_simples = tabela_tecnicas[nome]['cor']
-
-    if not cor_simples:
-        lista_elem = tabela_tecnicas[nome]['elementos']
-        cor_simples = (255, 255, 255)
-        if lista_elem and lista_elem[0] in cores_elementos:
-            cor_simples = cores_elementos[lista_elem[0]]
-
-    tabela_tecnicas[nome]['cor'] = cor_simples
-
-    print(f'\nTecnica "{colorir(nome, cor_simples)}" criada!')
-    print(tabela_tecnicas[nome])
-
-    p[0] = nome
+    if resultado is not None:
+        p[0] = resultado
 
 # Uso de técnica por uma entidade
 
@@ -542,45 +403,22 @@ def p_usar(p):
 
     # energia suficiente?
     if entidade['energia'] < tecnica['custo']:
-        print(f'Erro semântico: energia insuficiente')
+        print('Erro semântico: energia insuficiente')
         return
 
-   # Elementos necessários
-
-    elementos_necessarios = tecnica.get(
-        'requisitos',
-        tecnica['elementos']
-    )
-
-    for elemento in elementos_necessarios:
-
-        # elemento derivado?
-        if elemento in elementos_derivados:
-
-            requisitos = elementos_derivados[elemento]
-
-            for req in requisitos:
-
-                if req not in entidade['elementos']:
-                    print(
-                        f'Erro semântico: {nome_entidade} não possui o elemento "{req}" '
-                        f'para formar "{elemento}"'
-                    )
-                    return
-
-        else:
-
-            if elemento not in entidade['elementos']:
-                print(
-                    f'Erro semântico: {nome_entidade} não possui o elemento "{elemento}"'
-                )
-                return
+    # A entidade precisa ter o elemento da técnica sem fundir ou decair seus elementos
+    elemento_tecnica = tecnica['elementos'][0]
+    if elemento_tecnica not in entidade['elementos']:
+        print(
+            f'Erro semântico: A entidade "{nome_entidade}" não possui o elemento "{elemento_tecnica}" '
+            f'necessário para manifestar a técnica "{nome_tecnica}".'
+        )
+        return
 
     # Executa tecnica
     entidade['energia'] -= tecnica['custo']
-    cor = tecnica.get('cor', (255, 255, 255))
 
-    print(f'\n{nome_entidade} usou {colorir(nome_tecnica, cor)}!')
+    print(f'\n{nome_entidade} usou {colorir(nome_tecnica, tecnica["cor"])}!')
     print(f'Dano causado: {tecnica["dano"]}')
     print(f'energia restante: {entidade["energia"]}')
 
@@ -644,7 +482,7 @@ def p_propriedades_varias(p):
 
     p[0] = p[1] + [p[2]]
 
-# Propiedade única
+# Propriedade única
 def p_propriedades_unica(p):
     '''
     propriedades : propriedade
@@ -657,7 +495,7 @@ def p_corpo_tecnica_propriedades(p):
     corpo_tecnica : propriedades
     '''
 
-    p[0] = p[1]
+    p[0] = ('propriedades', p[1])
 
 
 # Corpo da Técnica - (técnicas simples e combinações recursivas)
@@ -666,7 +504,7 @@ def p_corpo_tecnica_combinacao(p):
     corpo_tecnica : COMBINAR combinacao
     '''
 
-    p[0] = p[2]
+    p[0] = ('combinacao', p[2])
 
 
 # Combinação recursiva
@@ -757,6 +595,11 @@ if __name__ == "__main__":
         elemento terra
     }
 
+    entidade ExplosionMage {
+        energia 300
+        elemento explosao
+    }
+
     tecnica fogo_base {
         elementos fogo
         custo 10
@@ -767,12 +610,7 @@ if __name__ == "__main__":
         elementos vento
         custo 15
         dano 25
-    }
-
-    tecnica agua_base {
-        elementos agua
-        custo 5
-        dano 10
+        cor #00FF00
     }
 
     tecnica terra_base {
@@ -781,40 +619,35 @@ if __name__ == "__main__":
         dano 18
     }
 
+    tecnica agua_base {
+        elementos agua
+        custo 5
+        dano 10
+    }
+
+    tecnica tempestade_direta {
+        elementos vento raio
+        custo 20
+        dano 30
+    }
+
     tecnica explosao {
         combinar fogo_base + vento_base
-    }
-
-    tecnica magma {
-        combinar explosao + agua_base
-    }
-
-    tecnica explosao_aprimorada {
-        combinar explosao + fogo_base
-    }
-
-    tecnica terremoto {
-        combinar explosao + terra_base
     }
 
     tecnica lava {
         combinar fogo_base + terra_base
     }
 
+    tecnica magma {
+        combinar explosao + agua_base
+    }
 
+    usar FrostMage fogo_base
     usar FrostMage explosao
-    usar FrostMage magma
-    usar FrostMage explosao_aprimorada
-    usar FrostMage terremoto
-    usar FrostMage lava
+    usar ExplosionMage explosao
+    usar ExplosionMage fogo_base
     '''
-
-    #Teste de entradas
-
-    """
-
-    """
-
 
     # Execução
     parser.parse(entrada_default)

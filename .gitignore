@@ -9,3 +9,4 @@ parser.out
 # VSCode (opcional)
 .vscode/
 /.venv
+src/testes.txt

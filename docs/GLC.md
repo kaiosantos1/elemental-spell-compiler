@@ -44,12 +44,14 @@ ELEMENTO,
 ELEMENTOS,
 CUSTO,
 DANO,
+COR,
 COMBINAR,
 ID,
 NUMERO,
 LBRACE,
 RBRACE,
-PLUS
+PLUS,
+HEXCODE
 }
 ```
 
@@ -118,6 +120,7 @@ propriedades → propriedade
 propriedade → ELEMENTOS lista_elementos
 propriedade → CUSTO NUMERO
 propriedade → DANO NUMERO
+propriedade → COR HEXCODE
 ```
 
 ### Lista de elementos

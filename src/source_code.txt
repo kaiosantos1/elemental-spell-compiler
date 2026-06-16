@@ -1,7 +1,6 @@
 entidade Megumin{
     energia 1000
-    elemento fogo
-    elemento vento
+    elemento explosao
 }
 
 tecnica EXPLOSION{
@@ -10,13 +9,13 @@ tecnica EXPLOSION{
         elementos vento
         custo 0
         dano 0
-        cor #0ae6ff
+        cor #fbff00
     } +
     tecnica ignition {
         elementos fogo
         custo 1000
         dano 10000
-        cor #0000FF
+        cor #ff0000
     }
 }
 

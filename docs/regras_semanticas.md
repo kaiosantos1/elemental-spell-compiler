@@ -2,8 +2,8 @@
 
 | Produção                                         | Ação Semântica                                                  |
 | ------------------------------------------------ | --------------------------------------------------------------- |
-| programa → programa declaracao                   | nenhuma ação semântica                                          |
-| programa → declaracao                            | nenhuma ação semântica                                          |
+| programa → programa declaracao                   | agrega uma nova declaração ao programa                          |
+| programa → declaracao                            | inicializa a estrutura do programa                              |
 | declaracao → entidade                            | encaminha resultado da entidade                                 |
 | declaracao → tecnica                             | encaminha resultado da técnica                                  |
 | declaracao → usar                                | executa comando de uso                                          |

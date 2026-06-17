@@ -1,240 +1,86 @@
-# Gramática Formal e Regras Semânticas — ElementalSpellCompiler
+# Tabela de Produções e Ações Semânticas
 
-## Produções e Regras Semânticas
+| Produção                                         | Ação Semântica                                                  |
+| ------------------------------------------------ | --------------------------------------------------------------- |
+| programa → programa declaracao                   | nenhuma ação semântica                                          |
+| programa → declaracao                            | nenhuma ação semântica                                          |
+| declaracao → entidade                            | encaminha resultado da entidade                                 |
+| declaracao → tecnica                             | encaminha resultado da técnica                                  |
+| declaracao → usar                                | executa comando de uso                                          |
+| entidade → ENTIDADE ID LBRACE atributos RBRACE   | tabela_entidades[ID] ← {energia, elementos}                     |
+| atributos → atributos atributo                   | atributos.lista ← atributos.lista + [atributo]                  |
+| atributos → atributo                             | atributos.lista ← [atributo]                                    |
+| atributo → ENERGIA NUMERO                        | atributo ← ('energia', NUMERO)                                  |
+| atributo → ELEMENTO ID                           | atributo ← ('elemento', ID)                                     |
+| tecnica → TECNICA ID LBRACE corpo_tecnica RBRACE | criar_tecnica_simples() ou criar_tecnica_composta()             |
+| corpo_tecnica → propriedades                     | corpo.tipo ← 'propriedades'                                     |
+| corpo_tecnica → COMBINAR combinacao              | corpo.tipo ← 'combinacao'                                       |
+| propriedades → propriedades propriedade          | propriedades.lista ← propriedades.lista + [propriedade]         |
+| propriedades → propriedade                       | propriedades.lista ← [propriedade]                              |
+| propriedade → ELEMENTOS lista_elementos          | propriedade ← ('elementos', lista_elementos)                    |
+| propriedade → CUSTO NUMERO                       | propriedade ← ('custo', NUMERO)                                 |
+| propriedade → DANO NUMERO                        | propriedade ← ('dano', NUMERO)                                  |
+| propriedade → COR HEXCODE                        | propriedade ← ('cor', hex_to_rgb(HEXCODE))                      |
+| lista_elementos → lista_elementos ID             | lista_elementos ← lista_elementos + [ID]                        |
+| lista_elementos → ID                             | lista_elementos ← [ID]                                          |
+| combinacao → combinacao PLUS item                | combinacao.lista ← combinacao.lista + [item]                    |
+| combinacao → item                                | combinacao.lista ← [item]                                       |
+| item → ID                                        | item.nome ← ID                                                  |
+| item → tecnica                                   | item.nome ← tecnica.criada                                      |
+| usar → USAR ID ID                                | validar entidade, técnica, energia e elemento; executar técnica |
 
-| Produção                                           | Regra Semântica                                                                    |
-| -------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `programa → programa declaracao`                   | Processa múltiplas declarações sequencialmente.                                    |
-| `programa → declaracao`                            | Inicializa o programa com uma única declaração.                                    |
-| `declaracao → entidade`                            | Executa a criação da entidade.                                                     |
-| `declaracao → tecnica`                             | Executa a criação da técnica.                                                      |
-| `declaracao → usar`                                | Executa o comando de uso de técnica.                                               |
-| `entidade → ENTIDADE ID LBRACE atributos RBRACE`   | Cria uma entidade na tabela de símbolos contendo energia e elementos válidos.      |
-| `atributos → atributos atributo`                   | Acumula atributos da entidade.                                                     |
-| `atributos → atributo`                             | Inicializa a lista de atributos.                                                   |
-| `atributo → ENERGIA NUMERO`                        | Define a energia inicial da entidade.                                              |
-| `atributo → ELEMENTO ID`                           | Adiciona um elemento à entidade após validação semântica.                          |
-| `tecnica → TECNICA ID LBRACE corpo_tecnica RBRACE` | Cria uma técnica simples ou composta.                                              |
-| `corpo_tecnica → propriedades`                     | Define uma técnica simples.                                                        |
-| `corpo_tecnica → COMBINAR combinacao`              | Define uma técnica composta baseada em combinação de técnicas.                     |
-| `propriedades → propriedades propriedade`          | Acumula propriedades da técnica.                                                   |
-| `propriedades → propriedade`                       | Inicializa a lista de propriedades.                                                |
-| `propriedade → ELEMENTOS lista_elementos`          | Define os elementos da técnica.                                                    |
-| `propriedade → CUSTO NUMERO`                       | Define o custo energético da técnica.                                              |
-| `propriedade → DANO NUMERO`                        | Define o dano da técnica.                                                          |
-| `propriedade → COR HEXCODE`                        | Define manualmente a cor da técnica utilizando um código hexadecimal RGB.          |
-| `lista_elementos → lista_elementos ID`             | Acumula elementos da técnica.                                                      |
-| `lista_elementos → ID`                             | Inicializa a lista de elementos.                                                   |
-| `combinacao → combinacao PLUS item`                | Permite combinações recursivas de técnicas.                                        |
-| `combinacao → item`                                | Inicializa uma combinação.                                                         |
-| `item → ID`                                        | Referencia uma técnica previamente criada.                                         |
-| `item → tecnica`                                   | Permite declarar uma técnica inline dentro da combinação.                          |
-| `usar → USAR ID ID`                                | Verifica entidade, técnica, energia e compatibilidade elemental antes da execução. |
+# Principais ações semânticas associadas
 
----
+## Criação de Entidade
 
-## Principais Ações Semânticas Implementadas
+entidade → ENTIDADE ID LBRACE atributos RBRACE
 
-### Entidades
+Ação:
 
-Ao criar uma entidade:
-
-* verifica se os elementos existem no sistema;
-* remove elementos duplicados;
-* registra a entidade em `tabela_entidades`.
-
-Estrutura armazenada:
-
-```python
-{
-    "energia": valor,
-    "elementos": [...]
+tabela_entidades[ID] ← {
+energia,
+elementos
 }
-```
 
 ---
 
-### Técnicas Simples
+## Criação de Técnica Simples
 
-Ao criar uma técnica simples:
+tecnica → TECNICA ID LBRACE propriedades RBRACE
 
-* valida os elementos informados;
-* calcula fusões automaticamente quando mais de um elemento é fornecido;
-* define custo e dano;
-* utiliza a cor da tabela ou uma cor definida pelo usuário;
-* registra a técnica em `tabela_tecnicas`.
+Ação:
 
-Estrutura:
-
-```python
-{
-    "elementos": [elemento_final],
-    "custo": valor,
-    "dano": valor,
-    "cor": (R,G,B),
-    "cor_manual": bool
-}
-```
+* valida elementos
+* realiza fusão automática dos elementos
+* calcula cor final
+* insere técnica em tabela_tecnicas
 
 ---
 
-### Técnicas Compostas
+## Criação de Técnica Composta
 
-Ao criar uma técnica composta:
+tecnica → TECNICA ID LBRACE COMBINAR combinacao RBRACE
 
-* verifica a existência das técnicas utilizadas;
-* soma custos;
-* soma danos;
-* reúne os elementos resultantes;
-* executa decaimento para elementos-base;
-* realiza fusão máxima dos elementos-base;
-* calcula a cor resultante.
+Ação:
 
-Se alguma técnica participante possuir cor manual:
-
-* realiza interpolação quadrática das cores.
-
-Caso contrário:
-
-* utiliza a cor cadastrada para o elemento resultante.
+* recupera técnicas referenciadas
+* soma custo
+* soma dano
+* funde elementos resultantes
+* calcula cor resultante
+* insere técnica em tabela_tecnicas
 
 ---
 
-### Sistema de Fusão Elemental
+## Execução de Técnica
 
-A função `fusao()`:
+usar → USAR ID ID
 
-1. recebe uma lista de elementos;
-2. decai elementos compostos em seus elementos-base;
-3. elimina duplicidades;
-4. procura a combinação correspondente em `tabela_fusoes`;
-5. retorna:
+Ação:
 
-   * elemento resultante;
-   * cor oficial do elemento.
-
-Exemplo:
-
-```txt
-fogo + vento
-→ explosao
-
-explosao + agua
-→ magma
-
-fogo + vento + agua + terra + raio
-→ Caos
-```
-
----
-
-### Técnicas Inline
-
-A gramática permite declarar técnicas diretamente dentro de uma combinação.
-
-Exemplo:
-
-```txt
-tecnica EXPLOSION {
-    combinar
-    tecnica fuel {
-        elementos vento
-        custo 0
-        dano 0
-        cor #fbff00
-    }
-    +
-    tecnica ignition {
-        elementos fogo
-        custo 1000
-        dano 10000
-        cor #ff0000
-    }
-}
-```
-
-As técnicas `fuel` e `ignition` são criadas durante o processo de análise sintática e imediatamente utilizadas na composição.
-
----
-
-### Uso de Técnica (`usar`)
-
-Valida:
-
-* existência da entidade;
-* existência da técnica;
-* energia suficiente;
-* posse do elemento necessário.
-
-A entidade deve possuir exatamente o elemento final da técnica.
-
-Exemplo:
-
-```txt
-elemento explosao
-```
-
-permite utilizar técnicas cujo resultado seja `explosao`.
-
-Após validação:
-
-* desconta energia;
-* executa a técnica;
-* exibe dano causado;
-* exibe energia restante.
-
----
-
-## Recursividades Presentes
-
-### Programa
-
-```txt
-programa → programa declaracao
-```
-
-Permite quantidade arbitrária de declarações.
-
-### Atributos
-
-```txt
-atributos → atributos atributo
-```
-
-Permite múltiplos atributos por entidade.
-
-### Propriedades
-
-```txt
-propriedades → propriedades propriedade
-```
-
-Permite múltiplas propriedades por técnica.
-
-### Lista de Elementos
-
-```txt
-lista_elementos → lista_elementos ID
-```
-
-Permite técnicas com múltiplos elementos.
-
-### Combinações
-
-```txt
-combinacao → combinacao PLUS item
-```
-
-Permite composições arbitrariamente profundas.
-
-Exemplo:
-
-```txt
-combinar
-    fogo_base +
-    tecnica buff {...} +
-    tecnica ritual {...} +
-    tecnica ultimate {...}
-```
-
-incluindo técnicas declaradas inline.
+* verifica existência da entidade
+* verifica existência da técnica
+* verifica energia suficiente
+* verifica compatibilidade elemental
+* desconta energia
+* executa técnica

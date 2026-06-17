@@ -2,117 +2,239 @@
 
 ## Produções e Regras Semânticas
 
-| Produção | Regra Semântica |
-|----------|------------------|
-| `programa → programa declaracao` | Concatena múltiplas declarações do programa. |
-| `programa → declaracao` | Inicializa o programa com uma única declaração. |
-| `declaracao → entidade` | Encaminha declaração de entidade. |
-| `declaracao → tecnica` | Encaminha declaração de técnica. |
-| `declaracao → usar` | Encaminha comando de uso de técnica. |
-| `entidade → ENTIDADE ID LBRACE atributos RBRACE` | Cria entidade na tabela de símbolos (`tabela_entidades`) com energia e elementos. |
-| `atributos → atributos atributo` | Acumula atributos recursivamente. |
-| `atributos → atributo` | Inicializa lista de atributos. |
-| `atributo → ENERGIA NUMERO` | Define valor energético da entidade. |
-| `atributo → ELEMENTO ID` | Adiciona elemento à entidade. |
-| `tecnica → TECNICA ID LBRACE corpo_tecnica RBRACE` | Cria técnica simples ou composta na tabela de técnicas. |
-| `corpo_tecnica → propriedades` | Define técnica simples baseada em propriedades explícitas. |
-| `corpo_tecnica → COMBINAR combinacao` | Define técnica composta baseada em combinações. |
-| `propriedades → propriedades propriedade` | Acumula propriedades recursivamente. |
-| `propriedades → propriedade` | Inicializa conjunto de propriedades. |
-| `propriedade → ELEMENTOS lista_elementos` | Define elementos necessários da técnica. |
-| `propriedade → CUSTO NUMERO` | Define custo energético da técnica. |
-| `propriedade → DANO NUMERO` | Define dano causado pela técnica. |
-| `lista_elementos → lista_elementos ID` | Acumula elementos recursivamente. |
-| `lista_elementos → ID` | Inicializa lista de elementos. |
-| `combinacao → combinacao PLUS item` | Permite combinações recursivas de técnicas. |
-| `combinacao → item` | Inicializa combinação. |
-| `item → ID` | Referencia técnica já existente. |
-| `item → tecnica` | Permite declaração inline de técnica dentro da combinação. |
-| `usar → USAR ID ID` | Verifica existência da entidade/técnica, energia disponível, compatibilidade elemental e executa a técnica. |
+| Produção                                           | Regra Semântica                                                                    |
+| -------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `programa → programa declaracao`                   | Processa múltiplas declarações sequencialmente.                                    |
+| `programa → declaracao`                            | Inicializa o programa com uma única declaração.                                    |
+| `declaracao → entidade`                            | Executa a criação da entidade.                                                     |
+| `declaracao → tecnica`                             | Executa a criação da técnica.                                                      |
+| `declaracao → usar`                                | Executa o comando de uso de técnica.                                               |
+| `entidade → ENTIDADE ID LBRACE atributos RBRACE`   | Cria uma entidade na tabela de símbolos contendo energia e elementos válidos.      |
+| `atributos → atributos atributo`                   | Acumula atributos da entidade.                                                     |
+| `atributos → atributo`                             | Inicializa a lista de atributos.                                                   |
+| `atributo → ENERGIA NUMERO`                        | Define a energia inicial da entidade.                                              |
+| `atributo → ELEMENTO ID`                           | Adiciona um elemento à entidade após validação semântica.                          |
+| `tecnica → TECNICA ID LBRACE corpo_tecnica RBRACE` | Cria uma técnica simples ou composta.                                              |
+| `corpo_tecnica → propriedades`                     | Define uma técnica simples.                                                        |
+| `corpo_tecnica → COMBINAR combinacao`              | Define uma técnica composta baseada em combinação de técnicas.                     |
+| `propriedades → propriedades propriedade`          | Acumula propriedades da técnica.                                                   |
+| `propriedades → propriedade`                       | Inicializa a lista de propriedades.                                                |
+| `propriedade → ELEMENTOS lista_elementos`          | Define os elementos da técnica.                                                    |
+| `propriedade → CUSTO NUMERO`                       | Define o custo energético da técnica.                                              |
+| `propriedade → DANO NUMERO`                        | Define o dano da técnica.                                                          |
+| `propriedade → COR HEXCODE`                        | Define manualmente a cor da técnica utilizando um código hexadecimal RGB.          |
+| `lista_elementos → lista_elementos ID`             | Acumula elementos da técnica.                                                      |
+| `lista_elementos → ID`                             | Inicializa a lista de elementos.                                                   |
+| `combinacao → combinacao PLUS item`                | Permite combinações recursivas de técnicas.                                        |
+| `combinacao → item`                                | Inicializa uma combinação.                                                         |
+| `item → ID`                                        | Referencia uma técnica previamente criada.                                         |
+| `item → tecnica`                                   | Permite declarar uma técnica inline dentro da combinação.                          |
+| `usar → USAR ID ID`                                | Verifica entidade, técnica, energia e compatibilidade elemental antes da execução. |
 
 ---
 
 ## Principais Ações Semânticas Implementadas
 
 ### Entidades
-- Inserção em `tabela_entidades`
-- Inicialização de:
-  - `energia`
-  - `elementos`
 
-### Técnicas Simples
-- Inserção em `tabela_tecnicas`
-- Definição de:
-  - elementos
-  - custo
-  - dano
+Ao criar uma entidade:
 
-### Técnicas Compostas
-- Combinação de técnicas existentes ou inline.
-- Soma de:
-  - custos
-  - danos
-- União dos elementos sem duplicação.
+* verifica se os elementos existem no sistema;
+* remove elementos duplicados;
+* registra a entidade em `tabela_entidades`.
 
-### Uso de Técnica (`usar`)
-Valida:
+Estrutura armazenada:
 
-- existência da entidade;
-- existência da técnica;
-- energia suficiente;
-- compatibilidade elemental.
-
-Após validação:
-
-- desconta energia da entidade;
-- executa a técnica;
-- imprime dano e energia restante.
+```python
+{
+    "energia": valor,
+    "elementos": [...]
+}
+```
 
 ---
 
-## Recursividades Presentes na Gramática
+### Técnicas Simples
 
-### Programa
-```txt
-programa → programa declaracao
+Ao criar uma técnica simples:
+
+* valida os elementos informados;
+* calcula fusões automaticamente quando mais de um elemento é fornecido;
+* define custo e dano;
+* utiliza a cor da tabela ou uma cor definida pelo usuário;
+* registra a técnica em `tabela_tecnicas`.
+
+Estrutura:
+
+```python
+{
+    "elementos": [elemento_final],
+    "custo": valor,
+    "dano": valor,
+    "cor": (R,G,B),
+    "cor_manual": bool
+}
 ```
 
-Permite múltiplas declarações.
+---
 
-### Lista de atributos
-```txt
-atributos → atributos atributo
-```
+### Técnicas Compostas
 
-Permite várias propriedades na entidade.
+Ao criar uma técnica composta:
 
-### Lista de propriedades
-```txt
-propriedades → propriedades propriedade
-```
+* verifica a existência das técnicas utilizadas;
+* soma custos;
+* soma danos;
+* reúne os elementos resultantes;
+* executa decaimento para elementos-base;
+* realiza fusão máxima dos elementos-base;
+* calcula a cor resultante.
 
-Permite múltiplas propriedades em técnicas.
+Se alguma técnica participante possuir cor manual:
 
-### Lista de elementos
-```txt
-lista_elementos → lista_elementos ID
-```
+* realiza interpolação quadrática das cores.
 
-Permite múltiplos elementos.
+Caso contrário:
 
-### Combinações de técnicas
-```txt
-combinacao → combinacao PLUS item
-```
+* utiliza a cor cadastrada para o elemento resultante.
 
-Permite combinações arbitrariamente profundas.
+---
+
+### Sistema de Fusão Elemental
+
+A função `fusao()`:
+
+1. recebe uma lista de elementos;
+2. decai elementos compostos em seus elementos-base;
+3. elimina duplicidades;
+4. procura a combinação correspondente em `tabela_fusoes`;
+5. retorna:
+
+   * elemento resultante;
+   * cor oficial do elemento.
 
 Exemplo:
 
 ```txt
-combinar fogo_base +
-         tecnica chama_sagrada {...} +
-         tecnica ritual {...}
+fogo + vento
+→ explosao
+
+explosao + agua
+→ magma
+
+fogo + vento + agua + terra + raio
+→ Caos
 ```
 
-inclusive com **recursividade de técnicas inline**.
+---
+
+### Técnicas Inline
+
+A gramática permite declarar técnicas diretamente dentro de uma combinação.
+
+Exemplo:
+
+```txt
+tecnica EXPLOSION {
+    combinar
+    tecnica fuel {
+        elementos vento
+        custo 0
+        dano 0
+        cor #fbff00
+    }
+    +
+    tecnica ignition {
+        elementos fogo
+        custo 1000
+        dano 10000
+        cor #ff0000
+    }
+}
+```
+
+As técnicas `fuel` e `ignition` são criadas durante o processo de análise sintática e imediatamente utilizadas na composição.
+
+---
+
+### Uso de Técnica (`usar`)
+
+Valida:
+
+* existência da entidade;
+* existência da técnica;
+* energia suficiente;
+* posse do elemento necessário.
+
+A entidade deve possuir exatamente o elemento final da técnica.
+
+Exemplo:
+
+```txt
+elemento explosao
+```
+
+permite utilizar técnicas cujo resultado seja `explosao`.
+
+Após validação:
+
+* desconta energia;
+* executa a técnica;
+* exibe dano causado;
+* exibe energia restante.
+
+---
+
+## Recursividades Presentes
+
+### Programa
+
+```txt
+programa → programa declaracao
+```
+
+Permite quantidade arbitrária de declarações.
+
+### Atributos
+
+```txt
+atributos → atributos atributo
+```
+
+Permite múltiplos atributos por entidade.
+
+### Propriedades
+
+```txt
+propriedades → propriedades propriedade
+```
+
+Permite múltiplas propriedades por técnica.
+
+### Lista de Elementos
+
+```txt
+lista_elementos → lista_elementos ID
+```
+
+Permite técnicas com múltiplos elementos.
+
+### Combinações
+
+```txt
+combinacao → combinacao PLUS item
+```
+
+Permite composições arbitrariamente profundas.
+
+Exemplo:
+
+```txt
+combinar
+    fogo_base +
+    tecnica buff {...} +
+    tecnica ritual {...} +
+    tecnica ultimate {...}
+```
+
+incluindo técnicas declaradas inline.

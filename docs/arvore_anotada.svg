@@ -1,0 +1,539 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="974pt" height="832pt" viewBox="0.00 0.00 974.00 832.00">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 828.4)">
+<title>ArvoreSemanticaAlinhada</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-828.4 970.24,-828.4 970.24,4 -4,4"/>
+<!-- prog_raiz -->
+<g id="node1" class="node">
+<title>prog_raiz</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M639.61,-824.4C639.61,-824.4 525.88,-824.4 525.88,-824.4 519.88,-824.4 513.88,-818.4 513.88,-812.4 513.88,-812.4 513.88,-800.4 513.88,-800.4 513.88,-794.4 519.88,-788.4 525.88,-788.4 525.88,-788.4 639.61,-788.4 639.61,-788.4 645.61,-788.4 651.61,-794.4 651.61,-800.4 651.61,-800.4 651.61,-812.4 651.61,-812.4 651.61,-818.4 645.61,-824.4 639.61,-824.4"/>
+<text xml:space="preserve" text-anchor="middle" x="582.74" y="-809.1" font-family="Arial Bold" font-size="9.00">programa</text>
+<text xml:space="preserve" text-anchor="middle" x="582.74" y="-798.3" font-family="Arial Bold" font-size="9.00">[Código Executado com Sucesso]</text>
+</g>
+<!-- prog1 -->
+<g id="node2" class="node">
+<title>prog1</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M571.75,-748.4C571.75,-748.4 465.74,-748.4 465.74,-748.4 459.74,-748.4 453.74,-742.4 453.74,-736.4 453.74,-736.4 453.74,-720 453.74,-720 453.74,-714 459.74,-708 465.74,-708 465.74,-708 571.75,-708 571.75,-708 577.75,-708 583.75,-714 583.75,-720 583.75,-720 583.75,-736.4 583.75,-736.4 583.75,-742.4 577.75,-748.4 571.75,-748.4"/>
+<text xml:space="preserve" text-anchor="middle" x="518.74" y="-736.3" font-family="Arial Bold" font-size="9.00">programa</text>
+<text xml:space="preserve" text-anchor="middle" x="518.74" y="-725.5" font-family="Arial Bold" font-size="9.00">tabela_tecnicas += {'lightning'}</text>
+<text xml:space="preserve" text-anchor="middle" x="518.74" y="-714.7" font-family="Arial Bold" font-size="9.00">tabela_entidades = {'Gandalf'}</text>
+</g>
+<!-- prog_raiz&#45;&gt;prog1 -->
+<g id="edge1" class="edge">
+<title>prog_raiz-&gt;prog1</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M568.54,-788.49C560.48,-778.89 550.21,-766.67 541.09,-755.81"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="543.46,-754.27 536.17,-749.95 539.17,-757.87 543.46,-754.27"/>
+</g>
+<!-- decl3 -->
+<g id="node6" class="node">
+<title>decl3</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M671.86,-746.2C671.86,-746.2 631.63,-746.2 631.63,-746.2 625.63,-746.2 619.63,-740.2 619.63,-734.2 619.63,-734.2 619.63,-722.2 619.63,-722.2 619.63,-716.2 625.63,-710.2 631.63,-710.2 631.63,-710.2 671.86,-710.2 671.86,-710.2 677.86,-710.2 683.86,-716.2 683.86,-722.2 683.86,-722.2 683.86,-734.2 683.86,-734.2 683.86,-740.2 677.86,-746.2 671.86,-746.2"/>
+<text xml:space="preserve" text-anchor="middle" x="651.74" y="-730.9" font-family="Arial Bold" font-size="9.00">declaracao</text>
+<text xml:space="preserve" text-anchor="middle" x="651.74" y="-720.1" font-family="Arial Bold" font-size="9.00">(executa uso)</text>
+</g>
+<!-- prog_raiz&#45;&gt;decl3 -->
+<g id="edge2" class="edge">
+<title>prog_raiz-&gt;decl3</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M598.06,-788.49C607.35,-778.23 619.36,-764.96 629.67,-753.58"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="631.66,-755.56 634.95,-747.75 627.5,-751.8 631.66,-755.56"/>
+</g>
+<!-- prog2 -->
+<g id="node3" class="node">
+<title>prog2</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M407.68,-660.4C407.68,-660.4 231.8,-660.4 231.8,-660.4 225.8,-660.4 219.8,-654.4 219.8,-648.4 219.8,-648.4 219.8,-636.4 219.8,-636.4 219.8,-630.4 225.8,-624.4 231.8,-624.4 231.8,-624.4 407.68,-624.4 407.68,-624.4 413.68,-624.4 419.68,-630.4 419.68,-636.4 419.68,-636.4 419.68,-648.4 419.68,-648.4 419.68,-654.4 413.68,-660.4 407.68,-660.4"/>
+<text xml:space="preserve" text-anchor="middle" x="319.74" y="-645.1" font-family="Arial Bold" font-size="9.00">programa</text>
+<text xml:space="preserve" text-anchor="middle" x="319.74" y="-634.3" font-family="Arial Bold" font-size="9.00">tabela_entidades['Gandalf'] = {energia, elementos}</text>
+</g>
+<!-- prog1&#45;&gt;prog2 -->
+<g id="edge3" class="edge">
+<title>prog1-&gt;prog2</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M473.59,-708.18C442.48,-695.09 401.16,-677.69 369.18,-664.22"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="370.55,-661.76 362.09,-661.23 368.37,-666.92 370.55,-661.76"/>
+</g>
+<!-- decl2 -->
+<g id="node5" class="node">
+<title>decl2</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M551.1,-660.4C551.1,-660.4 486.39,-660.4 486.39,-660.4 480.39,-660.4 474.39,-654.4 474.39,-648.4 474.39,-648.4 474.39,-636.4 474.39,-636.4 474.39,-630.4 480.39,-624.4 486.39,-624.4 486.39,-624.4 551.1,-624.4 551.1,-624.4 557.1,-624.4 563.1,-630.4 563.1,-636.4 563.1,-636.4 563.1,-648.4 563.1,-648.4 563.1,-654.4 557.1,-660.4 551.1,-660.4"/>
+<text xml:space="preserve" text-anchor="middle" x="518.74" y="-645.1" font-family="Arial Bold" font-size="9.00">declaracao</text>
+<text xml:space="preserve" text-anchor="middle" x="518.74" y="-634.3" font-family="Arial Bold" font-size="9.00">(encaminha tecnica)</text>
+</g>
+<!-- prog1&#45;&gt;decl2 -->
+<g id="edge4" class="edge">
+<title>prog1-&gt;decl2</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M518.74,-708.18C518.74,-697.05 518.74,-682.82 518.74,-670.52"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="521.54,-670.62 518.74,-662.62 515.94,-670.62 521.54,-670.62"/>
+</g>
+<!-- decl1 -->
+<g id="node4" class="node">
+<title>decl1</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M308.6,-574.6C308.6,-574.6 238.89,-574.6 238.89,-574.6 232.89,-574.6 226.89,-568.6 226.89,-562.6 226.89,-562.6 226.89,-550.6 226.89,-550.6 226.89,-544.6 232.89,-538.6 238.89,-538.6 238.89,-538.6 308.6,-538.6 308.6,-538.6 314.6,-538.6 320.6,-544.6 320.6,-550.6 320.6,-550.6 320.6,-562.6 320.6,-562.6 320.6,-568.6 314.6,-574.6 308.6,-574.6"/>
+<text xml:space="preserve" text-anchor="middle" x="273.74" y="-559.3" font-family="Arial Bold" font-size="9.00">declaracao</text>
+<text xml:space="preserve" text-anchor="middle" x="273.74" y="-548.5" font-family="Arial Bold" font-size="9.00">(encaminha entidade)</text>
+</g>
+<!-- prog2&#45;&gt;decl1 -->
+<g id="edge5" class="edge">
+<title>prog2-&gt;decl1</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M310.44,-624.44C303.95,-612.63 295.18,-596.66 287.85,-583.29"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="290.44,-582.19 284.13,-576.52 285.53,-584.88 290.44,-582.19"/>
+</g>
+<!-- entidade -->
+<g id="node7" class="node">
+<title>entidade</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M318.64,-494.2C318.64,-494.2 94.85,-494.2 94.85,-494.2 88.85,-494.2 82.85,-488.2 82.85,-482.2 82.85,-482.2 82.85,-470.2 82.85,-470.2 82.85,-464.2 88.85,-458.2 94.85,-458.2 94.85,-458.2 318.64,-458.2 318.64,-458.2 324.64,-458.2 330.64,-464.2 330.64,-470.2 330.64,-470.2 330.64,-482.2 330.64,-482.2 330.64,-488.2 324.64,-494.2 318.64,-494.2"/>
+<text xml:space="preserve" text-anchor="middle" x="206.74" y="-478.9" font-family="Arial Bold" font-size="9.00">entidade</text>
+<text xml:space="preserve" text-anchor="middle" x="206.74" y="-468.1" font-family="Arial Bold" font-size="9.00">tabela_entidades['Gandalf'] ← {energia: 500, elementos: ['raio']}</text>
+</g>
+<!-- decl1&#45;&gt;entidade -->
+<g id="edge6" class="edge">
+<title>decl1-&gt;entidade</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M259.53,-538.97C250.27,-528.13 238.02,-513.8 227.65,-501.67"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="229.96,-500.06 222.64,-495.8 225.71,-503.7 229.96,-500.06"/>
+</g>
+<!-- tecnica -->
+<g id="node20" class="node">
+<title>tecnica</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M574.85,-576.8C574.85,-576.8 462.64,-576.8 462.64,-576.8 456.64,-576.8 450.64,-570.8 450.64,-564.8 450.64,-564.8 450.64,-548.4 450.64,-548.4 450.64,-542.4 456.64,-536.4 462.64,-536.4 462.64,-536.4 574.85,-536.4 574.85,-536.4 580.85,-536.4 586.85,-542.4 586.85,-548.4 586.85,-548.4 586.85,-564.8 586.85,-564.8 586.85,-570.8 580.85,-576.8 574.85,-576.8"/>
+<text xml:space="preserve" text-anchor="middle" x="518.74" y="-564.7" font-family="Arial Bold" font-size="9.00">tecnica</text>
+<text xml:space="preserve" text-anchor="middle" x="518.74" y="-553.9" font-family="Arial Bold" font-size="9.00">criar_tecnica_simples('lightning')</text>
+<text xml:space="preserve" text-anchor="middle" x="518.74" y="-543.1" font-family="Arial Bold" font-size="9.00">insere em tabela_tecnicas</text>
+</g>
+<!-- decl2&#45;&gt;tecnica -->
+<g id="edge19" class="edge">
+<title>decl2-&gt;tecnica</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M518.74,-624.44C518.74,-613.61 518.74,-599.27 518.74,-586.66"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="521.54,-586.85 518.74,-578.85 515.94,-586.85 521.54,-586.85"/>
+</g>
+<!-- usar -->
+<g id="node39" class="node">
+<title>usar</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M742.48,-668C742.48,-668 645.01,-668 645.01,-668 639.01,-668 633.01,-662 633.01,-656 633.01,-656 633.01,-628.8 633.01,-628.8 633.01,-622.8 639.01,-616.8 645.01,-616.8 645.01,-616.8 742.48,-616.8 742.48,-616.8 748.48,-616.8 754.48,-622.8 754.48,-628.8 754.48,-628.8 754.48,-656 754.48,-656 754.48,-662 748.48,-668 742.48,-668"/>
+<text xml:space="preserve" text-anchor="middle" x="693.74" y="-655.9" font-family="Arial Bold" font-size="9.00">usar</text>
+<text xml:space="preserve" text-anchor="middle" x="693.74" y="-645.1" font-family="Arial Bold" font-size="9.00">[Validações Semânticas OK]</text>
+<text xml:space="preserve" text-anchor="middle" x="693.74" y="-634.3" font-family="Arial Bold" font-size="9.00">- Existência: Sim</text>
+<text xml:space="preserve" text-anchor="middle" x="693.74" y="-623.5" font-family="Arial Bold" font-size="9.00">- Energia &amp; Elemento: OK</text>
+</g>
+<!-- decl3&#45;&gt;usar -->
+<g id="edge38" class="edge">
+<title>decl3-&gt;usar</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M660.24,-710.24C665.05,-700.66 671.22,-688.33 676.96,-676.88"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="679.34,-678.4 680.42,-669.99 674.33,-675.89 679.34,-678.4"/>
+</g>
+<!-- e_tk -->
+<g id="node8" class="node">
+<title>e_tk</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M49.49,-416C49.49,-416 12,-416 12,-416 6,-416 0,-410 0,-404 0,-404 0,-392 0,-392 0,-386 6,-380 12,-380 12,-380 49.49,-380 49.49,-380 55.49,-380 61.49,-386 61.49,-392 61.49,-392 61.49,-404 61.49,-404 61.49,-410 55.49,-416 49.49,-416"/>
+<text xml:space="preserve" text-anchor="middle" x="30.74" y="-395.3" font-family="Arial Bold" font-size="9.00">ENTIDADE</text>
+</g>
+<!-- entidade&#45;&gt;e_tk -->
+<g id="edge7" class="edge">
+<title>entidade-&gt;e_tk</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M167.68,-458.29C138.72,-445.75 99.37,-428.71 70.29,-416.12"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="71.77,-413.71 63.32,-413.1 69.55,-418.85 71.77,-413.71"/>
+</g>
+<!-- e_id -->
+<g id="node9" class="node">
+<title>e_id</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M135.74,-416C135.74,-416 105.74,-416 105.74,-416 99.74,-416 93.74,-410 93.74,-404 93.74,-404 93.74,-392 93.74,-392 93.74,-386 99.74,-380 105.74,-380 105.74,-380 135.74,-380 135.74,-380 141.74,-380 147.74,-386 147.74,-392 147.74,-392 147.74,-404 147.74,-404 147.74,-410 141.74,-416 135.74,-416"/>
+<text xml:space="preserve" text-anchor="middle" x="120.74" y="-400.7" font-family="Arial Bold" font-size="9.00">ID</text>
+<text xml:space="preserve" text-anchor="middle" x="120.74" y="-389.9" font-family="Arial Bold" font-size="9.00">'Gandalf'</text>
+</g>
+<!-- entidade&#45;&gt;e_id -->
+<g id="edge8" class="edge">
+<title>entidade-&gt;e_id</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M187.66,-458.29C175.74,-447.73 160.24,-434 147.16,-422.4"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="149.32,-420.58 141.48,-417.37 145.61,-424.77 149.32,-420.58"/>
+</g>
+<!-- e_lbrace -->
+<g id="node10" class="node">
+<title>e_lbrace</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M221.74,-416C221.74,-416 191.74,-416 191.74,-416 185.74,-416 179.74,-410 179.74,-404 179.74,-404 179.74,-392 179.74,-392 179.74,-386 185.74,-380 191.74,-380 191.74,-380 221.74,-380 221.74,-380 227.74,-380 233.74,-386 233.74,-392 233.74,-392 233.74,-404 233.74,-404 233.74,-410 227.74,-416 221.74,-416"/>
+<text xml:space="preserve" text-anchor="middle" x="206.74" y="-395.3" font-family="Arial Bold" font-size="9.00">LBRACE</text>
+</g>
+<!-- entidade&#45;&gt;e_lbrace -->
+<g id="edge9" class="edge">
+<title>entidade-&gt;e_lbrace</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M206.74,-458.29C206.74,-448.82 206.74,-436.79 206.74,-426.04"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="209.54,-426.13 206.74,-418.13 203.94,-426.13 209.54,-426.13"/>
+</g>
+<!-- e_atribs1 -->
+<g id="node11" class="node">
+<title>e_atribs1</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M422.12,-416C422.12,-416 277.37,-416 277.37,-416 271.37,-416 265.37,-410 265.37,-404 265.37,-404 265.37,-392 265.37,-392 265.37,-386 271.37,-380 277.37,-380 277.37,-380 422.12,-380 422.12,-380 428.12,-380 434.12,-386 434.12,-392 434.12,-392 434.12,-404 434.12,-404 434.12,-410 428.12,-416 422.12,-416"/>
+<text xml:space="preserve" text-anchor="middle" x="349.74" y="-400.7" font-family="Arial Bold" font-size="9.00">atributos</text>
+<text xml:space="preserve" text-anchor="middle" x="349.74" y="-389.9" font-family="Arial Bold" font-size="9.00">lista = [('energia', 500), ('elemento', 'raio')]</text>
+</g>
+<!-- entidade&#45;&gt;e_atribs1 -->
+<g id="edge10" class="edge">
+<title>entidade-&gt;e_atribs1</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M238.48,-458.29C259.31,-447.19 286.74,-432.57 309.15,-420.63"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="310.35,-423.16 316.09,-416.93 307.72,-418.22 310.35,-423.16"/>
+</g>
+<!-- e_rbrace -->
+<g id="node12" class="node">
+<title>e_rbrace</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M507.74,-416C507.74,-416 477.74,-416 477.74,-416 471.74,-416 465.74,-410 465.74,-404 465.74,-404 465.74,-392 465.74,-392 465.74,-386 471.74,-380 477.74,-380 477.74,-380 507.74,-380 507.74,-380 513.74,-380 519.74,-386 519.74,-392 519.74,-392 519.74,-404 519.74,-404 519.74,-410 513.74,-416 507.74,-416"/>
+<text xml:space="preserve" text-anchor="middle" x="492.74" y="-395.3" font-family="Arial Bold" font-size="9.00">RBRACE</text>
+</g>
+<!-- entidade&#45;&gt;e_rbrace -->
+<g id="edge11" class="edge">
+<title>entidade-&gt;e_rbrace</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M288.52,-458.23C336.03,-447.63 396.78,-432.83 449.74,-416 452,-415.28 454.31,-414.5 456.63,-413.69"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="457.45,-416.37 463.98,-410.97 455.51,-411.12 457.45,-416.37"/>
+</g>
+<!-- e_atribs2 -->
+<g id="node13" class="node">
+<title>e_atribs2</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M278.89,-340C278.89,-340 202.6,-340 202.6,-340 196.6,-340 190.6,-334 190.6,-328 190.6,-328 190.6,-316 190.6,-316 190.6,-310 196.6,-304 202.6,-304 202.6,-304 278.89,-304 278.89,-304 284.89,-304 290.89,-310 290.89,-316 290.89,-316 290.89,-328 290.89,-328 290.89,-334 284.89,-340 278.89,-340"/>
+<text xml:space="preserve" text-anchor="middle" x="240.74" y="-324.7" font-family="Arial Bold" font-size="9.00">atributos</text>
+<text xml:space="preserve" text-anchor="middle" x="240.74" y="-313.9" font-family="Arial Bold" font-size="9.00">lista = [('energia', 500)]</text>
+</g>
+<!-- e_atribs1&#45;&gt;e_atribs2 -->
+<g id="edge12" class="edge">
+<title>e_atribs1-&gt;e_atribs2</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M324.74,-380.02C309.64,-369.78 290.23,-356.6 273.87,-345.49"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="275.7,-343.35 267.51,-341.17 272.56,-347.98 275.7,-343.35"/>
+</g>
+<!-- e_atrib_raio -->
+<g id="node14" class="node">
+<title>e_atrib_raio</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M390.72,-340C390.72,-340 334.76,-340 334.76,-340 328.76,-340 322.76,-334 322.76,-328 322.76,-328 322.76,-316 322.76,-316 322.76,-310 328.76,-304 334.76,-304 334.76,-304 390.72,-304 390.72,-304 396.72,-304 402.72,-310 402.72,-316 402.72,-316 402.72,-328 402.72,-328 402.72,-334 396.72,-340 390.72,-340"/>
+<text xml:space="preserve" text-anchor="middle" x="362.74" y="-324.7" font-family="Arial Bold" font-size="9.00">atributo</text>
+<text xml:space="preserve" text-anchor="middle" x="362.74" y="-313.9" font-family="Arial Bold" font-size="9.00">('elemento', 'raio')</text>
+</g>
+<!-- e_atribs1&#45;&gt;e_atrib_raio -->
+<g id="edge13" class="edge">
+<title>e_atribs1-&gt;e_atrib_raio</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M352.69,-380.21C354.26,-371.28 356.23,-360.1 358,-349.99"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="360.74,-350.58 359.37,-342.22 355.23,-349.61 360.74,-350.58"/>
+</g>
+<!-- e_atrib_en -->
+<g id="node17" class="node">
+<title>e_atrib_en</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M263.6,-264C263.6,-264 217.88,-264 217.88,-264 211.88,-264 205.88,-258 205.88,-252 205.88,-252 205.88,-240 205.88,-240 205.88,-234 211.88,-228 217.88,-228 217.88,-228 263.6,-228 263.6,-228 269.6,-228 275.6,-234 275.6,-240 275.6,-240 275.6,-252 275.6,-252 275.6,-258 269.6,-264 263.6,-264"/>
+<text xml:space="preserve" text-anchor="middle" x="240.74" y="-248.7" font-family="Arial Bold" font-size="9.00">atributo</text>
+<text xml:space="preserve" text-anchor="middle" x="240.74" y="-237.9" font-family="Arial Bold" font-size="9.00">('energia', 500)</text>
+</g>
+<!-- e_atribs2&#45;&gt;e_atrib_en -->
+<g id="edge16" class="edge">
+<title>e_atribs2-&gt;e_atrib_en</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M240.74,-304.21C240.74,-295.28 240.74,-284.1 240.74,-273.99"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="243.54,-274.25 240.74,-266.25 237.94,-274.25 243.54,-274.25"/>
+</g>
+<!-- e_raio_lbl -->
+<g id="node15" class="node">
+<title>e_raio_lbl</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M370.99,-264C370.99,-264 330.5,-264 330.5,-264 324.5,-264 318.5,-258 318.5,-252 318.5,-252 318.5,-240 318.5,-240 318.5,-234 324.5,-228 330.5,-228 330.5,-228 370.99,-228 370.99,-228 376.99,-228 382.99,-234 382.99,-240 382.99,-240 382.99,-252 382.99,-252 382.99,-258 376.99,-264 370.99,-264"/>
+<text xml:space="preserve" text-anchor="middle" x="350.74" y="-243.3" font-family="Arial Bold" font-size="9.00">ELEMENTO</text>
+</g>
+<!-- e_atrib_raio&#45;&gt;e_raio_lbl -->
+<g id="edge14" class="edge">
+<title>e_atrib_raio-&gt;e_raio_lbl</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M360.02,-304.21C358.57,-295.28 356.76,-284.1 355.12,-273.99"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="357.91,-273.67 353.86,-266.22 352.38,-274.57 357.91,-273.67"/>
+</g>
+<!-- e_raio_id -->
+<g id="node16" class="node">
+<title>e_raio_id</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M456.74,-264C456.74,-264 426.74,-264 426.74,-264 420.74,-264 414.74,-258 414.74,-252 414.74,-252 414.74,-240 414.74,-240 414.74,-234 420.74,-228 426.74,-228 426.74,-228 456.74,-228 456.74,-228 462.74,-228 468.74,-234 468.74,-240 468.74,-240 468.74,-252 468.74,-252 468.74,-258 462.74,-264 456.74,-264"/>
+<text xml:space="preserve" text-anchor="middle" x="441.74" y="-248.7" font-family="Arial Bold" font-size="9.00">ID</text>
+<text xml:space="preserve" text-anchor="middle" x="441.74" y="-237.9" font-family="Arial Bold" font-size="9.00">'raio'</text>
+</g>
+<!-- e_atrib_raio&#45;&gt;e_raio_id -->
+<g id="edge15" class="edge">
+<title>e_atrib_raio-&gt;e_raio_id</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M380.67,-304.21C391.2,-294.34 404.68,-281.71 416.3,-270.83"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="418.03,-273.05 421.96,-265.53 414.21,-268.96 418.03,-273.05"/>
+</g>
+<!-- e_en_lbl -->
+<g id="node18" class="node">
+<title>e_en_lbl</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M213.49,-188C213.49,-188 182,-188 182,-188 176,-188 170,-182 170,-176 170,-176 170,-164 170,-164 170,-158 176,-152 182,-152 182,-152 213.49,-152 213.49,-152 219.49,-152 225.49,-158 225.49,-164 225.49,-164 225.49,-176 225.49,-176 225.49,-182 219.49,-188 213.49,-188"/>
+<text xml:space="preserve" text-anchor="middle" x="197.74" y="-167.3" font-family="Arial Bold" font-size="9.00">ENERGIA</text>
+</g>
+<!-- e_atrib_en&#45;&gt;e_en_lbl -->
+<g id="edge17" class="edge">
+<title>e_atrib_en-&gt;e_en_lbl</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M230.99,-228.21C225.58,-218.91 218.75,-207.15 212.69,-196.71"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="215.19,-195.45 208.75,-189.94 210.35,-198.27 215.19,-195.45"/>
+</g>
+<!-- e_en_num -->
+<g id="node19" class="node">
+<title>e_en_num</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M300.24,-188C300.24,-188 269.24,-188 269.24,-188 263.24,-188 257.24,-182 257.24,-176 257.24,-176 257.24,-164 257.24,-164 257.24,-158 263.24,-152 269.24,-152 269.24,-152 300.24,-152 300.24,-152 306.24,-152 312.24,-158 312.24,-164 312.24,-164 312.24,-176 312.24,-176 312.24,-182 306.24,-188 300.24,-188"/>
+<text xml:space="preserve" text-anchor="middle" x="284.74" y="-172.7" font-family="Arial Bold" font-size="9.00">NUMERO</text>
+<text xml:space="preserve" text-anchor="middle" x="284.74" y="-161.9" font-family="Arial Bold" font-size="9.00">500</text>
+</g>
+<!-- e_atrib_en&#45;&gt;e_en_num -->
+<g id="edge18" class="edge">
+<title>e_atrib_en-&gt;e_en_num</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M250.73,-228.21C256.26,-218.91 263.25,-207.15 269.45,-196.71"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="271.8,-198.24 273.49,-189.93 266.99,-195.38 271.8,-198.24"/>
+</g>
+<!-- t_tk -->
+<g id="node21" class="node">
+<title>t_tk</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M405.24,-494.2C405.24,-494.2 374.25,-494.2 374.25,-494.2 368.25,-494.2 362.25,-488.2 362.25,-482.2 362.25,-482.2 362.25,-470.2 362.25,-470.2 362.25,-464.2 368.25,-458.2 374.25,-458.2 374.25,-458.2 405.24,-458.2 405.24,-458.2 411.24,-458.2 417.24,-464.2 417.24,-470.2 417.24,-470.2 417.24,-482.2 417.24,-482.2 417.24,-488.2 411.24,-494.2 405.24,-494.2"/>
+<text xml:space="preserve" text-anchor="middle" x="389.74" y="-473.5" font-family="Arial Bold" font-size="9.00">TECNICA</text>
+</g>
+<!-- tecnica&#45;&gt;t_tk -->
+<g id="edge20" class="edge">
+<title>tecnica-&gt;t_tk</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M487.19,-536.42C468.56,-525.1 444.92,-510.73 425.59,-498.98"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="427.27,-496.73 418.98,-494.97 424.36,-501.52 427.27,-496.73"/>
+</g>
+<!-- t_id -->
+<g id="node22" class="node">
+<title>t_id</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M490.74,-494.2C490.74,-494.2 460.74,-494.2 460.74,-494.2 454.74,-494.2 448.74,-488.2 448.74,-482.2 448.74,-482.2 448.74,-470.2 448.74,-470.2 448.74,-464.2 454.74,-458.2 460.74,-458.2 460.74,-458.2 490.74,-458.2 490.74,-458.2 496.74,-458.2 502.74,-464.2 502.74,-470.2 502.74,-470.2 502.74,-482.2 502.74,-482.2 502.74,-488.2 496.74,-494.2 490.74,-494.2"/>
+<text xml:space="preserve" text-anchor="middle" x="475.74" y="-478.9" font-family="Arial Bold" font-size="9.00">ID</text>
+<text xml:space="preserve" text-anchor="middle" x="475.74" y="-468.1" font-family="Arial Bold" font-size="9.00">'lightning'</text>
+</g>
+<!-- tecnica&#45;&gt;t_id -->
+<g id="edge21" class="edge">
+<title>tecnica-&gt;t_id</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M508.33,-536.62C502.78,-526.5 495.87,-513.89 489.84,-502.9"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="492.43,-501.79 486.12,-496.13 487.52,-504.49 492.43,-501.79"/>
+</g>
+<!-- t_lbrace -->
+<g id="node23" class="node">
+<title>t_lbrace</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M576.74,-494.2C576.74,-494.2 546.74,-494.2 546.74,-494.2 540.74,-494.2 534.74,-488.2 534.74,-482.2 534.74,-482.2 534.74,-470.2 534.74,-470.2 534.74,-464.2 540.74,-458.2 546.74,-458.2 546.74,-458.2 576.74,-458.2 576.74,-458.2 582.74,-458.2 588.74,-464.2 588.74,-470.2 588.74,-470.2 588.74,-482.2 588.74,-482.2 588.74,-488.2 582.74,-494.2 576.74,-494.2"/>
+<text xml:space="preserve" text-anchor="middle" x="561.74" y="-473.5" font-family="Arial Bold" font-size="9.00">LBRACE</text>
+</g>
+<!-- tecnica&#45;&gt;t_lbrace -->
+<g id="edge22" class="edge">
+<title>tecnica-&gt;t_lbrace</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M529.15,-536.62C534.71,-526.5 541.62,-513.89 547.65,-502.9"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="549.97,-504.49 551.36,-496.13 545.06,-501.79 549.97,-504.49"/>
+</g>
+<!-- t_corpo -->
+<g id="node24" class="node">
+<title>t_corpo</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M814.99,-496.4C814.99,-496.4 632.5,-496.4 632.5,-496.4 626.5,-496.4 620.5,-490.4 620.5,-484.4 620.5,-484.4 620.5,-468 620.5,-468 620.5,-462 626.5,-456 632.5,-456 632.5,-456 814.99,-456 814.99,-456 820.99,-456 826.99,-462 826.99,-468 826.99,-468 826.99,-484.4 826.99,-484.4 826.99,-490.4 820.99,-496.4 814.99,-496.4"/>
+<text xml:space="preserve" text-anchor="middle" x="723.74" y="-484.3" font-family="Arial Bold" font-size="9.00">corpo_tecnica</text>
+<text xml:space="preserve" text-anchor="middle" x="723.74" y="-473.5" font-family="Arial Bold" font-size="9.00">tipo = 'propriedades'</text>
+<text xml:space="preserve" text-anchor="middle" x="723.74" y="-462.7" font-family="Arial Bold" font-size="9.00">lista = [('elementos', ['raio']), ('custo', 5), ('dano', 20)]</text>
+</g>
+<!-- tecnica&#45;&gt;t_corpo -->
+<g id="edge23" class="edge">
+<title>tecnica-&gt;t_corpo</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M568.89,-536.42C597.66,-525.42 633.96,-511.54 664.18,-499.98"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="665.17,-502.6 671.64,-497.13 663.17,-497.37 665.17,-502.6"/>
+</g>
+<!-- t_rbrace -->
+<g id="node25" class="node">
+<title>t_rbrace</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M900.74,-494.2C900.74,-494.2 870.74,-494.2 870.74,-494.2 864.74,-494.2 858.74,-488.2 858.74,-482.2 858.74,-482.2 858.74,-470.2 858.74,-470.2 858.74,-464.2 864.74,-458.2 870.74,-458.2 870.74,-458.2 900.74,-458.2 900.74,-458.2 906.74,-458.2 912.74,-464.2 912.74,-470.2 912.74,-470.2 912.74,-482.2 912.74,-482.2 912.74,-488.2 906.74,-494.2 900.74,-494.2"/>
+<text xml:space="preserve" text-anchor="middle" x="885.74" y="-473.5" font-family="Arial Bold" font-size="9.00">RBRACE</text>
+</g>
+<!-- tecnica&#45;&gt;t_rbrace -->
+<g id="edge24" class="edge">
+<title>tecnica-&gt;t_rbrace</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M586.52,-539.74C592,-538.57 597.46,-537.44 602.74,-536.4 708.83,-515.45 739.2,-527.59 842.74,-496.4 844.91,-495.75 847.1,-495.01 849.3,-494.22"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="850.32,-496.83 856.73,-491.29 848.26,-491.62 850.32,-496.83"/>
+</g>
+<!-- props1 -->
+<g id="node26" class="node">
+<title>props1</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M814.99,-416C814.99,-416 632.5,-416 632.5,-416 626.5,-416 620.5,-410 620.5,-404 620.5,-404 620.5,-392 620.5,-392 620.5,-386 626.5,-380 632.5,-380 632.5,-380 814.99,-380 814.99,-380 820.99,-380 826.99,-386 826.99,-392 826.99,-392 826.99,-404 826.99,-404 826.99,-410 820.99,-416 814.99,-416"/>
+<text xml:space="preserve" text-anchor="middle" x="723.74" y="-400.7" font-family="Arial Bold" font-size="9.00">propriedades</text>
+<text xml:space="preserve" text-anchor="middle" x="723.74" y="-389.9" font-family="Arial Bold" font-size="9.00">lista = [('elementos', ['raio']), ('custo', 5), ('dano', 20)]</text>
+</g>
+<!-- t_corpo&#45;&gt;props1 -->
+<g id="edge25" class="edge">
+<title>t_corpo-&gt;props1</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M723.74,-456.36C723.74,-447.14 723.74,-435.87 723.74,-425.77"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="726.54,-426.07 723.74,-418.07 720.94,-426.07 726.54,-426.07"/>
+</g>
+<!-- props2 -->
+<g id="node27" class="node">
+<title>props2</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M785.62,-340C785.62,-340 647.86,-340 647.86,-340 641.86,-340 635.86,-334 635.86,-328 635.86,-328 635.86,-316 635.86,-316 635.86,-310 641.86,-304 647.86,-304 647.86,-304 785.62,-304 785.62,-304 791.62,-304 797.62,-310 797.62,-316 797.62,-316 797.62,-328 797.62,-328 797.62,-334 791.62,-340 785.62,-340"/>
+<text xml:space="preserve" text-anchor="middle" x="716.74" y="-324.7" font-family="Arial Bold" font-size="9.00">propriedades</text>
+<text xml:space="preserve" text-anchor="middle" x="716.74" y="-313.9" font-family="Arial Bold" font-size="9.00">lista = [('elementos', ['raio']), ('custo', 5)]</text>
+</g>
+<!-- props1&#45;&gt;props2 -->
+<g id="edge26" class="edge">
+<title>props1-&gt;props2</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M722.16,-380.21C721.31,-371.28 720.25,-360.1 719.3,-349.99"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="722.11,-349.94 718.56,-342.24 716.53,-350.47 722.11,-349.94"/>
+</g>
+<!-- prop_dano -->
+<g id="node28" class="node">
+<title>prop_dano</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M876.23,-340C876.23,-340 841.25,-340 841.25,-340 835.25,-340 829.25,-334 829.25,-328 829.25,-328 829.25,-316 829.25,-316 829.25,-310 835.25,-304 841.25,-304 841.25,-304 876.23,-304 876.23,-304 882.23,-304 888.23,-310 888.23,-316 888.23,-316 888.23,-328 888.23,-328 888.23,-334 882.23,-340 876.23,-340"/>
+<text xml:space="preserve" text-anchor="middle" x="858.74" y="-324.7" font-family="Arial Bold" font-size="9.00">propriedade</text>
+<text xml:space="preserve" text-anchor="middle" x="858.74" y="-313.9" font-family="Arial Bold" font-size="9.00">('dano', 20)</text>
+</g>
+<!-- props1&#45;&gt;prop_dano -->
+<g id="edge27" class="edge">
+<title>props1-&gt;prop_dano</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M754.72,-380.02C774.24,-369.32 799.61,-355.41 820.41,-344.01"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="821.65,-346.53 827.31,-340.23 818.95,-341.62 821.65,-346.53"/>
+</g>
+<!-- props3 -->
+<g id="node31" class="node">
+<title>props3</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M662.76,-264C662.76,-264 566.73,-264 566.73,-264 560.73,-264 554.73,-258 554.73,-252 554.73,-252 554.73,-240 554.73,-240 554.73,-234 560.73,-228 566.73,-228 566.73,-228 662.76,-228 662.76,-228 668.76,-228 674.76,-234 674.76,-240 674.76,-240 674.76,-252 674.76,-252 674.76,-258 668.76,-264 662.76,-264"/>
+<text xml:space="preserve" text-anchor="middle" x="614.74" y="-248.7" font-family="Arial Bold" font-size="9.00">propriedades</text>
+<text xml:space="preserve" text-anchor="middle" x="614.74" y="-237.9" font-family="Arial Bold" font-size="9.00">lista = [('elementos', ['raio'])]</text>
+</g>
+<!-- props2&#45;&gt;props3 -->
+<g id="edge30" class="edge">
+<title>props2-&gt;props3</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M693.34,-304.02C679.35,-293.87 661.39,-280.84 646.17,-269.8"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="647.99,-267.66 639.87,-265.23 644.7,-272.2 647.99,-267.66"/>
+</g>
+<!-- prop_custo -->
+<g id="node32" class="node">
+<title>prop_custo</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M754.23,-264C754.23,-264 719.25,-264 719.25,-264 713.25,-264 707.25,-258 707.25,-252 707.25,-252 707.25,-240 707.25,-240 707.25,-234 713.25,-228 719.25,-228 719.25,-228 754.23,-228 754.23,-228 760.23,-228 766.23,-234 766.23,-240 766.23,-240 766.23,-252 766.23,-252 766.23,-258 760.23,-264 754.23,-264"/>
+<text xml:space="preserve" text-anchor="middle" x="736.74" y="-248.7" font-family="Arial Bold" font-size="9.00">propriedade</text>
+<text xml:space="preserve" text-anchor="middle" x="736.74" y="-237.9" font-family="Arial Bold" font-size="9.00">('custo', 5)</text>
+</g>
+<!-- props2&#45;&gt;prop_custo -->
+<g id="edge31" class="edge">
+<title>props2-&gt;prop_custo</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M721.28,-304.21C723.72,-295.19 726.78,-283.86 729.54,-273.67"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="732.18,-274.63 731.56,-266.17 726.77,-273.17 732.18,-274.63"/>
+</g>
+<!-- p_dano_lbl -->
+<g id="node29" class="node">
+<title>p_dano_lbl</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M866.74,-264C866.74,-264 836.74,-264 836.74,-264 830.74,-264 824.74,-258 824.74,-252 824.74,-252 824.74,-240 824.74,-240 824.74,-234 830.74,-228 836.74,-228 836.74,-228 866.74,-228 866.74,-228 872.74,-228 878.74,-234 878.74,-240 878.74,-240 878.74,-252 878.74,-252 878.74,-258 872.74,-264 866.74,-264"/>
+<text xml:space="preserve" text-anchor="middle" x="851.74" y="-243.3" font-family="Arial Bold" font-size="9.00">DANO</text>
+</g>
+<!-- prop_dano&#45;&gt;p_dano_lbl -->
+<g id="edge28" class="edge">
+<title>prop_dano-&gt;p_dano_lbl</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M857.16,-304.21C856.31,-295.28 855.25,-284.1 854.3,-273.99"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="857.11,-273.94 853.56,-266.24 851.53,-274.47 857.11,-273.94"/>
+</g>
+<!-- p_dano_num -->
+<g id="node30" class="node">
+<title>p_dano_num</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M954.24,-264C954.24,-264 923.24,-264 923.24,-264 917.24,-264 911.24,-258 911.24,-252 911.24,-252 911.24,-240 911.24,-240 911.24,-234 917.24,-228 923.24,-228 923.24,-228 954.24,-228 954.24,-228 960.24,-228 966.24,-234 966.24,-240 966.24,-240 966.24,-252 966.24,-252 966.24,-258 960.24,-264 954.24,-264"/>
+<text xml:space="preserve" text-anchor="middle" x="938.74" y="-248.7" font-family="Arial Bold" font-size="9.00">NUMERO</text>
+<text xml:space="preserve" text-anchor="middle" x="938.74" y="-237.9" font-family="Arial Bold" font-size="9.00">20</text>
+</g>
+<!-- prop_dano&#45;&gt;p_dano_num -->
+<g id="edge29" class="edge">
+<title>prop_dano-&gt;p_dano_num</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M876.9,-304.21C887.56,-294.34 901.21,-281.71 912.98,-270.83"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="914.75,-273.01 918.72,-265.52 910.94,-268.9 914.75,-273.01"/>
+</g>
+<!-- prop_elem -->
+<g id="node35" class="node">
+<title>prop_elem</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M647.47,-188C647.47,-188 582.02,-188 582.02,-188 576.02,-188 570.02,-182 570.02,-176 570.02,-176 570.02,-164 570.02,-164 570.02,-158 576.02,-152 582.02,-152 582.02,-152 647.47,-152 647.47,-152 653.47,-152 659.47,-158 659.47,-164 659.47,-164 659.47,-176 659.47,-176 659.47,-182 653.47,-188 647.47,-188"/>
+<text xml:space="preserve" text-anchor="middle" x="614.74" y="-172.7" font-family="Arial Bold" font-size="9.00">propriedade</text>
+<text xml:space="preserve" text-anchor="middle" x="614.74" y="-161.9" font-family="Arial Bold" font-size="9.00">('elementos', ['raio'])</text>
+</g>
+<!-- props3&#45;&gt;prop_elem -->
+<g id="edge34" class="edge">
+<title>props3-&gt;prop_elem</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M614.74,-228.21C614.74,-219.28 614.74,-208.1 614.74,-197.99"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="617.54,-198.25 614.74,-190.25 611.94,-198.25 617.54,-198.25"/>
+</g>
+<!-- p_custo_lbl -->
+<g id="node33" class="node">
+<title>p_custo_lbl</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M742.74,-188C742.74,-188 712.74,-188 712.74,-188 706.74,-188 700.74,-182 700.74,-176 700.74,-176 700.74,-164 700.74,-164 700.74,-158 706.74,-152 712.74,-152 712.74,-152 742.74,-152 742.74,-152 748.74,-152 754.74,-158 754.74,-164 754.74,-164 754.74,-176 754.74,-176 754.74,-182 748.74,-188 742.74,-188"/>
+<text xml:space="preserve" text-anchor="middle" x="727.74" y="-167.3" font-family="Arial Bold" font-size="9.00">CUSTO</text>
+</g>
+<!-- prop_custo&#45;&gt;p_custo_lbl -->
+<g id="edge32" class="edge">
+<title>prop_custo-&gt;p_custo_lbl</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M734.7,-228.21C733.62,-219.28 732.26,-208.1 731.03,-197.99"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="733.83,-197.84 730.08,-190.24 728.27,-198.51 733.83,-197.84"/>
+</g>
+<!-- p_custo_num -->
+<g id="node34" class="node">
+<title>p_custo_num</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M830.24,-188C830.24,-188 799.24,-188 799.24,-188 793.24,-188 787.24,-182 787.24,-176 787.24,-176 787.24,-164 787.24,-164 787.24,-158 793.24,-152 799.24,-152 799.24,-152 830.24,-152 830.24,-152 836.24,-152 842.24,-158 842.24,-164 842.24,-164 842.24,-176 842.24,-176 842.24,-182 836.24,-188 830.24,-188"/>
+<text xml:space="preserve" text-anchor="middle" x="814.74" y="-172.7" font-family="Arial Bold" font-size="9.00">NUMERO</text>
+<text xml:space="preserve" text-anchor="middle" x="814.74" y="-161.9" font-family="Arial Bold" font-size="9.00">5</text>
+</g>
+<!-- prop_custo&#45;&gt;p_custo_num -->
+<g id="edge33" class="edge">
+<title>prop_custo-&gt;p_custo_num</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M754.44,-228.21C764.84,-218.34 778.15,-205.71 789.62,-194.83"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="791.32,-197.08 795.2,-189.54 787.47,-193.02 791.32,-197.08"/>
+</g>
+<!-- p_elem_lbl -->
+<g id="node36" class="node">
+<title>p_elem_lbl</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M585.49,-112C585.49,-112 540,-112 540,-112 534,-112 528,-106 528,-100 528,-100 528,-88 528,-88 528,-82 534,-76 540,-76 540,-76 585.49,-76 585.49,-76 591.49,-76 597.49,-82 597.49,-88 597.49,-88 597.49,-100 597.49,-100 597.49,-106 591.49,-112 585.49,-112"/>
+<text xml:space="preserve" text-anchor="middle" x="562.74" y="-91.3" font-family="Arial Bold" font-size="9.00">ELEMENTOS</text>
+</g>
+<!-- prop_elem&#45;&gt;p_elem_lbl -->
+<g id="edge35" class="edge">
+<title>prop_elem-&gt;p_elem_lbl</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M602.94,-152.21C596.28,-142.72 587.81,-130.67 580.37,-120.08"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="582.87,-118.77 575.98,-113.84 578.29,-121.99 582.87,-118.77"/>
+</g>
+<!-- p_elem_lista -->
+<g id="node37" class="node">
+<title>p_elem_lista</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M689.74,-112C689.74,-112 641.75,-112 641.75,-112 635.75,-112 629.75,-106 629.75,-100 629.75,-100 629.75,-88 629.75,-88 629.75,-82 635.75,-76 641.75,-76 641.75,-76 689.74,-76 689.74,-76 695.74,-76 701.74,-82 701.74,-88 701.74,-88 701.74,-100 701.74,-100 701.74,-106 695.74,-112 689.74,-112"/>
+<text xml:space="preserve" text-anchor="middle" x="665.74" y="-96.7" font-family="Arial Bold" font-size="9.00">lista_elementos</text>
+<text xml:space="preserve" text-anchor="middle" x="665.74" y="-85.9" font-family="Arial Bold" font-size="9.00">lista = ['raio']</text>
+</g>
+<!-- prop_elem&#45;&gt;p_elem_lista -->
+<g id="edge36" class="edge">
+<title>prop_elem-&gt;p_elem_lista</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M626.32,-152.21C632.79,-142.81 640.99,-130.91 648.24,-120.4"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="650.52,-122.03 652.75,-113.85 645.91,-118.85 650.52,-122.03"/>
+</g>
+<!-- p_elem_id -->
+<g id="node38" class="node">
+<title>p_elem_id</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M680.74,-36C680.74,-36 650.74,-36 650.74,-36 644.74,-36 638.74,-30 638.74,-24 638.74,-24 638.74,-12 638.74,-12 638.74,-6 644.74,0 650.74,0 650.74,0 680.74,0 680.74,0 686.74,0 692.74,-6 692.74,-12 692.74,-12 692.74,-24 692.74,-24 692.74,-30 686.74,-36 680.74,-36"/>
+<text xml:space="preserve" text-anchor="middle" x="665.74" y="-20.7" font-family="Arial Bold" font-size="9.00">ID</text>
+<text xml:space="preserve" text-anchor="middle" x="665.74" y="-9.9" font-family="Arial Bold" font-size="9.00">'raio'</text>
+</g>
+<!-- p_elem_lista&#45;&gt;p_elem_id -->
+<g id="edge37" class="edge">
+<title>p_elem_lista-&gt;p_elem_id</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M665.74,-76.21C665.74,-67.28 665.74,-56.1 665.74,-45.99"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="668.54,-46.25 665.74,-38.25 662.94,-46.25 668.54,-46.25"/>
+</g>
+<!-- u_tk -->
+<g id="node40" class="node">
+<title>u_tk</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M660.74,-574.6C660.74,-574.6 630.74,-574.6 630.74,-574.6 624.74,-574.6 618.74,-568.6 618.74,-562.6 618.74,-562.6 618.74,-550.6 618.74,-550.6 618.74,-544.6 624.74,-538.6 630.74,-538.6 630.74,-538.6 660.74,-538.6 660.74,-538.6 666.74,-538.6 672.74,-544.6 672.74,-550.6 672.74,-550.6 672.74,-562.6 672.74,-562.6 672.74,-568.6 666.74,-574.6 660.74,-574.6"/>
+<text xml:space="preserve" text-anchor="middle" x="645.74" y="-553.9" font-family="Arial Bold" font-size="9.00">USAR</text>
+</g>
+<!-- usar&#45;&gt;u_tk -->
+<g id="edge39" class="edge">
+<title>usar-&gt;u_tk</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M679.86,-617.16C673.72,-606.44 666.49,-593.82 660.28,-582.97"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="662.87,-581.87 656.47,-576.32 658.01,-584.65 662.87,-581.87"/>
+</g>
+<!-- u_id1 -->
+<g id="node41" class="node">
+<title>u_id1</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M746.74,-574.6C746.74,-574.6 716.74,-574.6 716.74,-574.6 710.74,-574.6 704.74,-568.6 704.74,-562.6 704.74,-562.6 704.74,-550.6 704.74,-550.6 704.74,-544.6 710.74,-538.6 716.74,-538.6 716.74,-538.6 746.74,-538.6 746.74,-538.6 752.74,-538.6 758.74,-544.6 758.74,-550.6 758.74,-550.6 758.74,-562.6 758.74,-562.6 758.74,-568.6 752.74,-574.6 746.74,-574.6"/>
+<text xml:space="preserve" text-anchor="middle" x="731.74" y="-559.3" font-family="Arial Bold" font-size="9.00">ID</text>
+<text xml:space="preserve" text-anchor="middle" x="731.74" y="-548.5" font-family="Arial Bold" font-size="9.00">'Gandalf'</text>
+</g>
+<!-- usar&#45;&gt;u_id1 -->
+<g id="edge40" class="edge">
+<title>usar-&gt;u_id1</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M704.74,-617.16C709.5,-606.65 715.09,-594.33 719.94,-583.62"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="722.46,-584.86 723.21,-576.42 717.36,-582.54 722.46,-584.86"/>
+</g>
+<!-- u_id2 -->
+<g id="node42" class="node">
+<title>u_id2</title>
+<path fill="#ffcc00" stroke="#ffcc00" stroke-width="0" d="M832.74,-574.6C832.74,-574.6 802.74,-574.6 802.74,-574.6 796.74,-574.6 790.74,-568.6 790.74,-562.6 790.74,-562.6 790.74,-550.6 790.74,-550.6 790.74,-544.6 796.74,-538.6 802.74,-538.6 802.74,-538.6 832.74,-538.6 832.74,-538.6 838.74,-538.6 844.74,-544.6 844.74,-550.6 844.74,-550.6 844.74,-562.6 844.74,-562.6 844.74,-568.6 838.74,-574.6 832.74,-574.6"/>
+<text xml:space="preserve" text-anchor="middle" x="817.74" y="-559.3" font-family="Arial Bold" font-size="9.00">ID</text>
+<text xml:space="preserve" text-anchor="middle" x="817.74" y="-548.5" font-family="Arial Bold" font-size="9.00">'lightning'</text>
+</g>
+<!-- usar&#45;&gt;u_id2 -->
+<g id="edge41" class="edge">
+<title>usar-&gt;u_id2</title>
+<path fill="none" stroke="#000000" stroke-width="1.5" d="M729.94,-616.94C747.11,-605.34 767.49,-591.56 784.29,-580.21"/>
+<polygon fill="#000000" stroke="#000000" stroke-width="1.5" points="785.77,-582.59 790.83,-575.79 782.64,-577.95 785.77,-582.59"/>
+</g>
+</g>
+</svg>

@@ -78,7 +78,7 @@ tabela_fusoes = {
     # =========================================================================
     # Singularidade
     # =========================================================================
-    frozenset(['fogo', 'vento', 'agua', 'terra', 'raio']): 'Caos'
+    frozenset(['fogo', 'vento', 'agua', 'terra', 'raio']): 'caos'
 }
 
 cores_elementos = {
@@ -133,7 +133,7 @@ cores_elementos = {
     # =========================================================================
     # Singularidade
     # =========================================================================
-    'Caos': (20, 20, 20),          # Preto absoluto
+    'caos': (20, 20, 20),          # Preto absoluto
 }
 
 fusoes_inversas = {v: k for k, v in tabela_fusoes.items()}
